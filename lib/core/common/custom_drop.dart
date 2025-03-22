@@ -135,7 +135,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   ),
                   inputDecorationTheme: InputDecorationTheme(
                     hintStyle: GoogleFonts.varelaRound(
-                      color: widget.textColor.withOpacity(0.5),
+                      color: widget.textColor,
                       fontSize: widget.fontSize,
                     ),
                     border: OutlineInputBorder(
@@ -159,7 +159,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: widget.focusedBorderColor,
-                        width: 2,
+                        width: 20,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
