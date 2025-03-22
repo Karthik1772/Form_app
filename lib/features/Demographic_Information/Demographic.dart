@@ -1,6 +1,7 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_textfield.dart';
+import 'package:demo/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +33,7 @@ class _DemographicState extends State<Demographic> {
                 child: Text(
                   "Demographic Details",
                   style: GoogleFonts.varelaRound(
-                    color: Colors.black,
+                    color: AppColors.black,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
@@ -44,17 +45,9 @@ class _DemographicState extends State<Demographic> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CustomTextField(
-                        controller: _name,
-                        hint: "Name",
-                        prefixIcon: Icons.person,
-                      ),
+                      CustomTextField(controller: _name, hint: "Name"),
                       const SizedBox(height: 50),
-                      CustomTextField(
-                        controller: _email,
-                        hint: "Email",
-                        prefixIcon: Icons.email,
-                      ),
+                      CustomTextField(controller: _email, hint: "Email"),
                       const SizedBox(height: 50),
                       CustomDropDown(
                         list: [
