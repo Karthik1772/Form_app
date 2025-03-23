@@ -1,11 +1,13 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
+import 'package:demo/core/common/custom_snackbar.dart';
 import 'package:demo/core/common/custom_textfield.dart';
 import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/Demographic_Information/sheets/googlesheet.dart';
 import 'package:demo/features/Demographic_Information/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Demographic extends StatefulWidget {
   const Demographic({super.key});
@@ -21,6 +23,28 @@ class _DemographicState extends State<Demographic> {
   final TextEditingController _gender = TextEditingController();
   final TextEditingController _location = TextEditingController();
   final TextEditingController _occupation = TextEditingController();
+
+  bool _isSubmitted = false; 
+
+  @override
+  void initState() {
+    super.initState();
+    _checkSubmissionStatus();
+  }
+
+  // Check if details were already submitted
+  Future<void> _checkSubmissionStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+    });
+  }
+
+  // Save submission status
+  Future<void> _setSubmissionStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('demographic_submitted', true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +127,22 @@ class _DemographicState extends State<Demographic> {
                     child: CustomButtons(
                       text: "Save",
                       onpressed: () async {
+                        if (_isSubmitted) {
+                          CustomSnackbar.snackbarShow(
+                              context, "Details already submitted.");
+                          return;
+                        }
+                        if (_name.text.trim().isEmpty ||
+                            _email.text.trim().isEmpty ||
+                            _age.text.trim().isEmpty ||
+                            _gender.text.trim().isEmpty ||
+                            _location.text.trim().isEmpty ||
+                            _occupation.text.trim().isEmpty) {
+                          CustomSnackbar.snackbarShow(
+                              context, "Please fill all required fields!");
+                          return;
+                        }
+
                         final feedback = {
                           SheetsColumn.name: _name.text.trim(),
                           SheetsColumn.email: _email.text.trim(),
@@ -111,7 +151,12 @@ class _DemographicState extends State<Demographic> {
                           SheetsColumn.location: _location.text.trim(),
                           SheetsColumn.occupation: _occupation.text.trim(),
                         };
-                        await SheetsFlutter.insert([feedback]);
+
+                        await SheetsFlutter.insert(context, [feedback]);
+                        await _setSubmissionStatus(); 
+                        setState(() {
+                          _isSubmitted = true;
+                        });
                       },
                     ),
                   ),

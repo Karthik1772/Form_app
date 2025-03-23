@@ -68,7 +68,6 @@ class _CustomDropDownState extends State<CustomDropDown> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       width: widget.dropdownWidth,
-      height: widget.dropdownHeight,
       child: Builder(
         builder: (BuildContext context) {
           return Theme(
@@ -99,7 +98,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   controller: widget.dropDownController,
                   width: widget.dropdownWidth,
                   initialSelection: null,
-                  hintText: widget.hintText,
+                  hintText: null, // Removed default hint
                   focusNode: _focusNode,
                   onSelected: (String? value) {
                     if (value != null) {
@@ -159,7 +158,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: widget.focusedBorderColor,
-                        width: 20,
+                        width: 2,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -173,9 +172,16 @@ class _CustomDropDownState extends State<CustomDropDown> {
                       (states) => widget.arrowColor,
                     ),
                   ),
-                  trailingIcon: Icon(
-                    Icons.arrow_drop_down,
-                    color: widget.arrowColor,
+                  label: Text(
+                    widget.dropDownController.text.isNotEmpty
+                        ? widget.dropDownController.text
+                        : widget.hintText,
+                    style: GoogleFonts.varelaRound(
+                      color: widget.textColor,
+                      fontSize: widget.fontSize,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.visible, 
                   ),
                 ),
               ),
