@@ -24,7 +24,7 @@ class _DemographicState extends State<Demographic> {
   final TextEditingController _location = TextEditingController();
   final TextEditingController _occupation = TextEditingController();
 
-  // bool _isSubmitted = false; 
+  // bool _isSubmitted = false;
 
   // @override
   // void initState() {
@@ -137,7 +137,9 @@ class _DemographicState extends State<Demographic> {
                             _location.text.trim().isEmpty ||
                             _occupation.text.trim().isEmpty) {
                           CustomSnackbar.snackbarShow(
-                              context, "Please fill all required fields!");
+                            context,
+                            "Please fill all required fields!",
+                          );
                           return;
                         }
 
@@ -151,7 +153,7 @@ class _DemographicState extends State<Demographic> {
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);
-                        // await _setSubmissionStatus(); 
+                        // await _setSubmissionStatus();
                         // setState(() {
                         //   _isSubmitted = true;
                         // });

@@ -1,7 +1,7 @@
 import 'package:demo/features/Consumer_Choices/customer.dart';
 import 'package:demo/features/Demographic_Information/Demographic.dart';
 import 'package:demo/features/Energy_Consumption/energy.dart';
-import 'package:demo/features/Environmentally%20Awareness/Environment.dart';
+import 'package:demo/features/Environmentally_Awareness/Environment.dart';
 import 'package:demo/features/Food_Consumption/Food.dart';
 import 'package:demo/features/Miscellaneous_details/Miscellaneous.dart';
 import 'package:demo/features/Occupation_details/Occupation.dart';

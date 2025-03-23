@@ -1,5 +1,5 @@
 class SheetsColumn {
-  static final name = "Name";
+  static final name=  "Name";
   static final email = "Email";
   static final age = "Age";
   static final gender = "Gender";
@@ -16,3 +16,4 @@ class SheetsColumn {
         occupation,
       ];
 }
+

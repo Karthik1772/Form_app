@@ -1,8 +1,12 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
+import 'package:demo/core/common/custom_snackbar.dart';
 import 'package:demo/core/themes/app_colors.dart';
+import 'package:demo/features/Food_Consumption/sheets/googlesheet.dart';
+import 'package:demo/features/Food_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Food extends StatefulWidget {
   const Food({super.key});
@@ -22,6 +26,25 @@ class _Food extends State<Food> {
   final TextEditingController _rice = TextEditingController();
   final TextEditingController _wheat = TextEditingController();
   final TextEditingController _nuts = TextEditingController();
+  //   bool _isSubmitted = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _checkSubmissionStatus();
+  // }
+
+  // Future<void> _checkSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //   });
+  // }
+
+  // Future<void> _setSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('demographic_submitted', true);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -178,13 +201,58 @@ class _Food extends State<Food> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: CustomButtons(text: "Save", onpressed: () {}),
+                    child: CustomButtons(
+                      text: "Save",
+                      onpressed: () async {
+                        // if (_isSubmitted) {
+                        //   CustomSnackbar.snackbarShow(
+                        //       context, "Details already submitted.");
+                        //   return;
+                        // }
+                        if (_diet.text.trim().isEmpty ||
+                            _beef.text.trim().isEmpty ||
+                            _pork.text.trim().isEmpty ||
+                            _mutton.text.trim().isEmpty ||
+                            _milk.text.trim().isEmpty ||
+                            _potato.text.trim().isEmpty||
+                            _vegetables.text.trim().isEmpty||
+                            _rice.text.trim().isEmpty||
+                            _wheat.text.trim().isEmpty||
+                            _nuts.text.trim().isEmpty) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please fill all required fields!",
+                          );
+                          return;
+                        }
+
+                        final feedback = {
+                          SheetsColumn.diet: _diet.text.trim(),
+                          SheetsColumn.beef: _beef.text.trim(),
+                          SheetsColumn.pork: _pork.text.trim(),
+                          SheetsColumn.mutton: _mutton.text.trim(),
+                          SheetsColumn.milk: _milk.text.trim(),
+                          SheetsColumn.potato: _potato.text.trim(),
+                          SheetsColumn.vegetables: _vegetables.text.trim(),
+                          SheetsColumn.rice: _rice.text.trim(),
+                          SheetsColumn.wheat: _wheat.text.trim(),
+                          SheetsColumn.nuts: _nuts.text.trim(),
+                        };
+
+                        await SheetsFlutter.insert(context, [feedback]);
+                        // await _setSubmissionStatus();
+                        // setState(() {
+                        //   _isSubmitted = true;
+                        // });
+                      },
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed: () => Navigator.pushNamed(context, '/energy'),
+                      onpressed:
+                          () => Navigator.pushNamed(context, '/transportation'),
                     ),
                   ),
                 ],

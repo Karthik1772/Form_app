@@ -1,8 +1,12 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
+import 'package:demo/core/common/custom_snackbar.dart';
 import 'package:demo/core/themes/app_colors.dart';
+import 'package:demo/features/Environmentally_Awareness/sheets/googlesheet.dart';
+import 'package:demo/features/Environmentally_Awareness/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class Environment extends StatefulWidget {
   const Environment({super.key});
@@ -15,6 +19,26 @@ class _Environment extends State<Environment> {
   final TextEditingController _garden = TextEditingController();
   final TextEditingController _aprogram = TextEditingController();
   final TextEditingController _trend = TextEditingController();
+
+  // bool _isSubmitted = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _checkSubmissionStatus();
+  // }
+
+  // Future<void> _checkSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //   });
+  // }
+
+  // Future<void> _setSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('demographic_submitted', true);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +92,47 @@ class _Environment extends State<Environment> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: CustomButtons(text: "Save", onpressed: () {}),
+                    child: CustomButtons(
+                      text: "Save",
+                      onpressed: () async {
+                        // if (_isSubmitted) {
+                        //   CustomSnackbar.snackbarShow(
+                        //     context,
+                        //     "Details already submitted.",
+                        //   );
+                        //   return;
+                        // }
+                        if (_garden.text.trim().isEmpty ||
+                            _aprogram.text.trim().isEmpty ||
+                            _trend.text.trim().isEmpty) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please fill all required fields!",
+                          );
+                          return;
+                        }
+
+                        final feedback = {
+                          SheetsColumn.gardens: _garden.text.trim(),
+                          SheetsColumn.awarness: _aprogram.text.trim(),
+                          SheetsColumn.trends: _trend.text.trim(),
+                        };
+
+                        await SheetsFlutter.insert(context, [feedback]);
+                        // await _setSubmissionStatus();
+                        // setState(() {
+                        //   _isSubmitted = true;
+                        // });
+                      },
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
-                    child: CustomButtons(text: "Next", onpressed: ()=> Navigator.pushNamed(context, '/occupation')),
+                    child: CustomButtons(
+                      text: "Next",
+                      onpressed:
+                          () => Navigator.pushNamed(context, '/occupation'),
+                    ),
                   ),
                 ],
               ),
