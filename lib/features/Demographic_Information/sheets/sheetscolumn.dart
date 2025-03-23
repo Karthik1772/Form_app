@@ -1,10 +1,11 @@
 class SheetsColumn {
-  static const name = "Name";
-  static const email = "Email";
-  static const age = "Age";
-  static const gender = "Gender";
-  static const location = "Location";
-  static const occupation = "Occupation";
+  static final name = "Name";
+  static final email = "Email";
+  static final age = "Age";
+  static final gender = "Gender";
+  static final location = "Location";
+  static final occupation = "Occupation";
+
 
   static List<String> getColumns() => [
         name,
