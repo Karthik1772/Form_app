@@ -1,5 +1,8 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
+import 'package:demo/core/common/custom_snackbar.dart';
+import 'package:demo/features/Consumer_Choices/sheets/googlesheet.dart';
+import 'package:demo/features/Consumer_Choices/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +17,25 @@ class _Customer extends State<Customer> {
   final TextEditingController _buy = TextEditingController();
   final TextEditingController _reduce = TextEditingController();
   final TextEditingController _carbon = TextEditingController();
+// bool _isSubmitted = false;
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _checkSubmissionStatus();
+  // }
+
+  // Future<void> _checkSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //   });
+  // }
+
+  // Future<void> _setSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('demographic_submitted', true);
+  // }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,13 +107,44 @@ class _Customer extends State<Customer> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: CustomButtons(text: "Save", onpressed: () {}),
+                    child: CustomButtons(
+                      text: "Save",
+                      onpressed: () async {
+                        // if (_isSubmitted) {
+                        //   CustomSnackbar.snackbarShow(
+                        //       context, "Details already submitted.");
+                        //   return;
+                        // }
+                        if (_buy.text.trim().isEmpty ||
+                            _reduce.text.trim().isEmpty||
+                            _carbon.text.trim().isEmpty) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please fill all required fields!",
+                          );
+                          return;
+                        }
+
+                        final feedback = {
+                          SheetsColumn.power: _buy.text.trim(),
+                          SheetsColumn.energy: _reduce.text.trim(),
+                          SheetsColumn.month: _carbon.text.trim(),
+                        };
+
+                        await SheetsFlutter.insert(context, [feedback]);
+                        // await _setSubmissionStatus();
+                        // setState(() {
+                        //   _isSubmitted = true;
+                        // });
+                      },
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed: () => Navigator.pushNamed(context, '/miscellaneous'),
+                      onpressed:
+                          () => Navigator.pushNamed(context, '/miscellaneous'),
                     ),
                   ),
                 ],

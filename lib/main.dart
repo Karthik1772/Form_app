@@ -4,6 +4,9 @@ import 'package:demo/features/Environmentally_Awareness/sheets/googlesheet.dart'
 import 'package:demo/features/Occupation_details/sheets/googlesheet.dart' as Occupation;
 import 'package:demo/features/Food_Consumption/sheets/googlesheet.dart' as Food;
 import 'package:demo/features/Energy_Consumption/sheets/googlesheet.dart' as Energy;
+import 'package:demo/features/waste_managment/sheets/googlesheet.dart' as Waste;
+import 'package:demo/features/Consumer_Choices/sheets/googlesheet.dart' as Consumer;
+import 'package:demo/features/Miscellaneous_details/sheets/googlesheet.dart' as Miscellaneous;
 import 'package:demo/core/routes/generated_routes.dart';
 import 'package:demo/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +19,9 @@ void main() async {
   await Occupation.SheetsFlutter.init();
   await Food.SheetsFlutter.init();
   await Energy.SheetsFlutter.init();
+  await Waste.SheetsFlutter.init();
+  await Consumer.SheetsFlutter.init();
+  await Miscellaneous.SheetsFlutter.init();
   runApp(const MyApp());
 }
 
