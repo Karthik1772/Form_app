@@ -2,8 +2,8 @@ import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_textfield.dart';
 import 'package:demo/core/themes/app_colors.dart';
-import 'package:demo/features/Demographic_Information/googlesheet.dart';
-import 'package:demo/features/Demographic_Information/sheetscolumn.dart';
+import 'package:demo/features/Demographic_Information/sheets/googlesheet.dart';
+import 'package:demo/features/Demographic_Information/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
