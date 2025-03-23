@@ -6,7 +6,7 @@ import 'package:demo/features/Occupation_details/sheets/googlesheet.dart';
 import 'package:demo/features/Occupation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class Occupation extends StatefulWidget {
   const Occupation({super.key});
@@ -36,10 +36,10 @@ class _Occupation extends State<Occupation> {
   //   });
   // }
 
-  Future<void> _setSubmissionStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('demographic_submitted', true);
-  }
+  // Future<void> _setSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('demographic_submitted', true);
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/features/Food_Consumption/sheets/sheetscolumn.dart';
+import 'package:demo/features/Energy_Consumption/sheets/sheetscolumn.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:flutter/material.dart';
 
@@ -22,18 +22,21 @@ class SheetsFlutter {
     "universe_domain": "googleapis.com"
   }
   ''');
-
   static final _gsheet = GSheets(jsonEncode(_credentials));
   static Worksheet? _userSheet;
 
   static Future init() async {
     try {
       final spreadsheet = await _gsheet.spreadsheet(_sheetId);
-      _userSheet = await _getWorksheet(spreadsheet, title: "Food");
-      final firstRow = SheetsColumn.getColumns();
-      _userSheet!.values.insertRow(1, firstRow);
+      _userSheet = await _getWorksheet(spreadsheet, title: "Energy");
+
+      final firstRow = await _userSheet!.values.row(1);
+      if (firstRow.isEmpty) {
+        await _userSheet!.values.insertRow(1, SheetsColumn.getColumns());
+        print("Column headers created in Transportation sheet");
+      }
     } catch (e) {
-      print("Error initializing Google Sheets: $e");
+      print("Error initializing Google Sheets: \$e");
     }
   }
 
