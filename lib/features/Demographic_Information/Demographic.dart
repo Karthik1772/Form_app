@@ -2,6 +2,8 @@ import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_textfield.dart';
 import 'package:demo/core/themes/app_colors.dart';
+import 'package:demo/features/Demographic_Information/googlesheet.dart';
+import 'package:demo/features/Demographic_Information/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -98,7 +100,20 @@ class _DemographicState extends State<Demographic> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: CustomButtons(text: "Save", onpressed: () {}),
+                    child: CustomButtons(
+                      text: "Save",
+                      onpressed: () async {
+                        final feedback = {
+                          SheetsColumn.name: _name.text.trim(),
+                          SheetsColumn.email: _email.text.trim(),
+                          SheetsColumn.age: _age.text.trim(),
+                          SheetsColumn.gender: _gender.text.trim(),
+                          SheetsColumn.location: _location.text.trim(),
+                          SheetsColumn.occupation: _occupation.text.trim(),
+                        };
+                        await SheetsFlutter.insert([feedback]);
+                      },
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(

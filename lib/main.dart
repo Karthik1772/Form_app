@@ -1,8 +1,10 @@
+import 'package:demo/features/Demographic_Information/googlesheet.dart';
 import 'package:demo/core/routes/generated_routes.dart';
 import 'package:demo/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  await SheetsFlutter.init();
   runApp(const MyApp());
 }
 
@@ -21,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.lightTheme,
       onGenerateRoute: Routes.onGenerate,
-      initialRoute: "/demographic", 
+      initialRoute: "/demographic",
     );
   }
 }
