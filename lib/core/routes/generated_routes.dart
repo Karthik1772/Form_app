@@ -1,12 +1,13 @@
-import 'package:demo/features/Consumer_Choices/customer.dart';
-import 'package:demo/features/Demographic_Information/Demographic.dart';
-import 'package:demo/features/Energy_Consumption/energy.dart';
-import 'package:demo/features/Environmentally_Awareness/Environment.dart';
-import 'package:demo/features/Food_Consumption/Food.dart';
-import 'package:demo/features/Miscellaneous_details/Miscellaneous.dart';
-import 'package:demo/features/Occupation_details/Occupation.dart';
-import 'package:demo/features/transpotation_details/transportation.dart';
-import 'package:demo/features/waste_managment/waste.dart';
+import 'package:demo/features/sheet_pages/Consumer_Choices/customer.dart';
+import 'package:demo/features/sheet_pages/Demographic_Information/Demographic.dart';
+import 'package:demo/features/sheet_pages/Energy_Consumption/energy.dart';
+import 'package:demo/features/sheet_pages/Environmentally_Awareness/Environment.dart';
+import 'package:demo/features/sheet_pages/Food_Consumption/Food.dart';
+import 'package:demo/features/sheet_pages/Miscellaneous_details/Miscellaneous.dart';
+import 'package:demo/features/sheet_pages/Occupation_details/Occupation.dart';
+import 'package:demo/features/sheet_pages/transpotation_details/transportation.dart';
+import 'package:demo/features/sheet_pages/waste_managment/waste.dart';
+import 'package:demo/features/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -28,8 +29,10 @@ class Routes {
         return MaterialPageRoute(builder: (context) => Waste());
       case "/customer":
         return MaterialPageRoute(builder: (context) => Customer());
-        case "/miscellaneous":
+      case "/miscellaneous":
         return MaterialPageRoute(builder: (context) => Miscellaneous());
+      case "/splash":
+        return MaterialPageRoute(builder: (context) => Splash());
     }
     return null;
   }
