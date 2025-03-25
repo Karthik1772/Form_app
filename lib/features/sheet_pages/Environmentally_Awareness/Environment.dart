@@ -1,7 +1,6 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Environmentally_Awareness/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Environmentally_Awareness/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -31,35 +30,38 @@ class _Environment extends State<Environment> {
   // Future<void> _checkSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
-  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //     _isSubmitted = prefs.getBool('Environmental_Awareness') ?? false;
   //   });
   // }
 
   // Future<void> _setSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('demographic_submitted', true);
+  //   await prefs.setBool('Environmental_Awareness', true);
   // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Environmental Awareness",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Environmentally Awareness",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -113,9 +115,9 @@ class _Environment extends State<Environment> {
                         }
 
                         final feedback = {
-                          SheetsColumn.gardens: _garden.text.trim(),
-                          SheetsColumn.awarness: _aprogram.text.trim(),
-                          SheetsColumn.trends: _trend.text.trim(),
+                          SheetsColumn.garden: _garden.text.trim(),
+                          SheetsColumn.aprogram: _aprogram.text.trim(),
+                          SheetsColumn.trend: _trend.text.trim(),
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);

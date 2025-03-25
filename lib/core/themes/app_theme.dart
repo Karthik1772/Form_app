@@ -14,12 +14,12 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
       //__________________________________________________________APP_BAR
-      backgroundColor: AppColors.white,
-      iconTheme: IconThemeData(color: AppColors.orange),
+      backgroundColor: AppColors.orange,
+      iconTheme: IconThemeData(color: AppColors.white),
       actionsIconTheme: IconThemeData(color: AppColors.orange),
       elevation: 0,
       titleTextStyle: GoogleFonts.poppins(
-        color: AppColors.black,
+        color: AppColors.white,
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),

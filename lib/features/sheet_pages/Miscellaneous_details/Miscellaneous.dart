@@ -1,7 +1,6 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Miscellaneous_details/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Miscellaneous_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -42,22 +41,25 @@ class _Miscellaneous extends State<Miscellaneous> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Miscellaneous details",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Miscellaneous details",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -117,9 +119,8 @@ class _Miscellaneous extends State<Miscellaneous> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomButtons(
-                      text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/transportation'),
+                      text: "Submit",
+                      onpressed: () => Navigator.pushNamed(context, ''),
                     ),
                   ),
                 ],

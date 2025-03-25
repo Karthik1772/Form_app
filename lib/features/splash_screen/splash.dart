@@ -33,17 +33,19 @@ class _SplashState extends State<Splash> {
     super.initState();
     initData();
   }
-  Future<void>initData()async{
+
+  Future<void> initData() async {
     await Demographic.SheetsFlutter.init();
-  await Transport.SheetsFlutter.init();
-  await Environment.SheetsFlutter.init();
-  await Occupation.SheetsFlutter.init();
-  await Food.SheetsFlutter.init();
-  await Energy.SheetsFlutter.init();
-  await Waste.SheetsFlutter.init();
-  await Consumer.SheetsFlutter.init();
-  await Miscellaneous.SheetsFlutter.init();
+    await Transport.SheetsFlutter.init();
+    await Environment.SheetsFlutter.init();
+    await Occupation.SheetsFlutter.init();
+    await Food.SheetsFlutter.init();
+    await Energy.SheetsFlutter.init();
+    await Waste.SheetsFlutter.init();
+    await Consumer.SheetsFlutter.init();
+    await Miscellaneous.SheetsFlutter.init();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.orange,
@@ -51,7 +53,7 @@ class _SplashState extends State<Splash> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 10),
+            SizedBox(height: 50),
             Text(
               "Form App",
               style: GoogleFonts.varelaRound(
@@ -62,8 +64,10 @@ class _SplashState extends State<Splash> {
             Container(
               width: 150,
               height: 150,
+              child: Icon(Icons.person, color: AppColors.white, size: 120),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(90),
               ),
             ),
             SizedBox(height: 350),

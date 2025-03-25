@@ -2,7 +2,6 @@ import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
 import 'package:demo/core/common/custom_textfield.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Demographic_Information/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Demographic_Information/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -48,22 +47,26 @@ class _DemographicState extends State<Demographic> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          title: Text(
+            "Demographic Details",
+            style: GoogleFonts.varelaRound(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Demographic Details",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(

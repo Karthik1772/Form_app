@@ -1,7 +1,6 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Food_Consumption/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Food_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -37,35 +36,38 @@ class _Food extends State<Food> {
   // Future<void> _checkSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
-  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //     _isSubmitted = prefs.getBool('Food_Consumption') ?? false;
   //   });
   // }
 
   // Future<void> _setSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('demographic_submitted', true);
+  //   await prefs.setBool('Food_Consumption', true);
   // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Food Consumption",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Food Consumption",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -214,10 +216,10 @@ class _Food extends State<Food> {
                             _pork.text.trim().isEmpty ||
                             _mutton.text.trim().isEmpty ||
                             _milk.text.trim().isEmpty ||
-                            _potato.text.trim().isEmpty||
-                            _vegetables.text.trim().isEmpty||
-                            _rice.text.trim().isEmpty||
-                            _wheat.text.trim().isEmpty||
+                            _potato.text.trim().isEmpty ||
+                            _vegetables.text.trim().isEmpty ||
+                            _rice.text.trim().isEmpty ||
+                            _wheat.text.trim().isEmpty ||
                             _nuts.text.trim().isEmpty) {
                           CustomSnackbar.snackbarShow(
                             context,
@@ -251,8 +253,7 @@ class _Food extends State<Food> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/energy'),
+                      onpressed: () => Navigator.pushNamed(context, '/energy'),
                     ),
                   ),
                 ],

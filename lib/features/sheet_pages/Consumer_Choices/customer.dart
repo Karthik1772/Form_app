@@ -17,7 +17,7 @@ class _Customer extends State<Customer> {
   final TextEditingController _buy = TextEditingController();
   final TextEditingController _reduce = TextEditingController();
   final TextEditingController _carbon = TextEditingController();
-// bool _isSubmitted = false;
+  // bool _isSubmitted = false;
 
   // @override
   // void initState() {
@@ -28,34 +28,37 @@ class _Customer extends State<Customer> {
   // Future<void> _checkSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
-  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //     _isSubmitted = prefs.getBool('Consumer_Details') ?? false;
   //   });
   // }
 
   // Future<void> _setSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('demographic_submitted', true);
+  //   await prefs.setBool('Consumer_Details', true);
   // }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Consumer Details",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Consumer Details",
-                  style: GoogleFonts.varelaRound(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -116,7 +119,7 @@ class _Customer extends State<Customer> {
                         //   return;
                         // }
                         if (_buy.text.trim().isEmpty ||
-                            _reduce.text.trim().isEmpty||
+                            _reduce.text.trim().isEmpty ||
                             _carbon.text.trim().isEmpty) {
                           CustomSnackbar.snackbarShow(
                             context,
@@ -126,9 +129,9 @@ class _Customer extends State<Customer> {
                         }
 
                         final feedback = {
-                          SheetsColumn.power: _buy.text.trim(),
-                          SheetsColumn.energy: _reduce.text.trim(),
-                          SheetsColumn.month: _carbon.text.trim(),
+                          SheetsColumn.buy: _buy.text.trim(),
+                          SheetsColumn.reduce: _reduce.text.trim(),
+                          SheetsColumn.carbon: _carbon.text.trim(),
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);

@@ -1,7 +1,6 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Occupation_details/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Occupation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -32,35 +31,38 @@ class _Occupation extends State<Occupation> {
   // Future<void> _checkSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
-  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //     _isSubmitted = prefs.getBool('Occupation_Details') ?? false;
   //   });
   // }
 
   // Future<void> _setSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('demographic_submitted', true);
+  //   await prefs.setBool('Occupation_Details', true);
   // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Occupation Details",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Occupation Details",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -122,7 +124,7 @@ class _Occupation extends State<Occupation> {
                             _aprogram.text.trim().isEmpty ||
                             _seminar.text.trim().isEmpty ||
                             _distance.text.trim().isEmpty ||
-                            _earn.text.trim().isEmpty ) {
+                            _earn.text.trim().isEmpty) {
                           CustomSnackbar.snackbarShow(
                             context,
                             "Please fill all required fields!",
@@ -132,9 +134,9 @@ class _Occupation extends State<Occupation> {
 
                         final feedback = {
                           SheetsColumn.business: _business.text.trim(),
-                          SheetsColumn.awarness: _aprogram.text.trim(),
+                          SheetsColumn.aprogram: _aprogram.text.trim(),
                           SheetsColumn.seminar: _seminar.text.trim(),
-                          SheetsColumn.far: _distance.text.trim(),
+                          SheetsColumn.distance: _distance.text.trim(),
                           SheetsColumn.earn: _earn.text.trim(),
                         };
 

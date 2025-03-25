@@ -1,17 +1,17 @@
 class SheetsColumn {
-  static final primaryTransport = "Primary mode of transportation";
-  static final hybridVehicle = "Do you own an electric or hybrid vehicle";
+  static final primary = "Primary mode of transportation";
+  static final hybrid = "Do you own an electric or hybrid vehicle";
   static final frequency = "Frequency of using private transportation";
-  static final drivingPattern = "Driving pattern";
+  static final Pattern = "Driving pattern";
   static final distance = "Average distance traveled per day (in kilometers)";
-  static final carpool = "Do you carpool or share rides";
+  static final pool = "Do you carpool or share rides";
 
   static List<String> getColumns() => [
-        primaryTransport,
-        hybridVehicle,
+        primary,
+        hybrid,
         frequency,
-        drivingPattern,
+        Pattern,
         distance,
-        carpool,
+        pool,
       ];
 }

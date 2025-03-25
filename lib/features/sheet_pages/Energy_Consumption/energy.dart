@@ -1,7 +1,6 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
 import 'package:demo/core/common/custom_snackbar.dart';
-import 'package:demo/core/themes/app_colors.dart';
 import 'package:demo/features/sheet_pages/Energy_Consumption/sheets/googlesheet.dart';
 import 'package:demo/features/sheet_pages/Energy_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -31,35 +30,38 @@ class _Energy extends State<Energy> {
   // Future<void> _checkSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   setState(() {
-  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //     _isSubmitted = prefs.getBool('Energy_Consumption') ?? false;
   //   });
   // }
 
   // Future<void> _setSubmissionStatus() async {
   //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('demographic_submitted', true);
+  //   await prefs.setBool('Energy_Consumption', true);
   // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Energy Consumption",
+            style: GoogleFonts.varelaRound(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Center(
-                child: Text(
-                  "Energy Consumption",
-                  style: GoogleFonts.varelaRound(
-                    color: AppColors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -119,7 +121,7 @@ class _Energy extends State<Energy> {
                         // }
                         if (_power.text.trim().isEmpty ||
                             _energy.text.trim().isEmpty ||
-                            _month.text.trim().isEmpty ) {
+                            _month.text.trim().isEmpty) {
                           CustomSnackbar.snackbarShow(
                             context,
                             "Please fill all required fields!",
@@ -145,8 +147,7 @@ class _Energy extends State<Energy> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/waste'),
+                      onpressed: () => Navigator.pushNamed(context, '/waste'),
                     ),
                   ),
                 ],
