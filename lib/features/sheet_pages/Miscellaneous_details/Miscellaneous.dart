@@ -1,8 +1,12 @@
 import 'package:demo/core/common/custom_buttons.dart';
 import 'package:demo/core/common/custom_drop.dart';
+import 'package:demo/core/common/custom_snackbar.dart';
 import 'package:demo/core/themes/app_colors.dart';
+import 'package:demo/features/sheet_pages/Miscellaneous_details/sheets/googlesheet.dart';
+import 'package:demo/features/sheet_pages/Miscellaneous_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class Miscellaneous extends StatefulWidget {
   const Miscellaneous({super.key});
@@ -14,6 +18,25 @@ class Miscellaneous extends StatefulWidget {
 class _Miscellaneous extends State<Miscellaneous> {
   final TextEditingController _flight = TextEditingController();
   final TextEditingController _carbon = TextEditingController();
+  // bool _isSubmitted = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _checkSubmissionStatus();
+  // }
+
+  // Future<void> _checkSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isSubmitted = prefs.getBool('demographic_submitted') ?? false;
+  //   });
+  // }
+
+  // Future<void> _setSubmissionStatus() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setBool('demographic_submitted', true);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +81,49 @@ class _Miscellaneous extends State<Miscellaneous> {
                 ),
               ),
               const SizedBox(height: 50),
-              CustomButtons(text: "Submit", onpressed: () {}),
-              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomButtons(
+                      text: "Save",
+                      onpressed: () async {
+                        // if (_isSubmitted) {
+                        //   CustomSnackbar.snackbarShow(
+                        //       context, "Details already submitted.");
+                        //   return;
+                        // }
+                        if (_flight.text.trim().isEmpty ||
+                            _carbon.text.trim().isEmpty) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please fill all required fields!",
+                          );
+                          return;
+                        }
+
+                        final feedback = {
+                          SheetsColumn.flight: _flight.text.trim(),
+                          SheetsColumn.carbon: _carbon.text.trim(),
+                        };
+
+                        await SheetsFlutter.insert(context, [feedback]);
+                        // await _setSubmissionStatus();
+                        // setState(() {
+                        //   _isSubmitted = true;
+                        // });
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: CustomButtons(
+                      text: "Next",
+                      onpressed:
+                          () => Navigator.pushNamed(context, '/transportation'),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
