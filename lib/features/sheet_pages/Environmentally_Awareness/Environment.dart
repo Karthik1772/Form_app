@@ -5,7 +5,6 @@ import 'package:demo/features/sheet_pages/Environmentally_Awareness/sheets/googl
 import 'package:demo/features/sheet_pages/Environmentally_Awareness/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Environment extends StatefulWidget {
   const Environment({super.key});
@@ -19,26 +18,8 @@ class _Environment extends State<Environment> {
   final TextEditingController _aprogram = TextEditingController();
   final TextEditingController _trend = TextEditingController();
 
-  // bool _isSubmitted = false;
+  bool _isSubmitted = false;
   bool _next = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkSubmissionStatus();
-  // }
-
-  // Future<void> _checkSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _isSubmitted = prefs.getBool('Environmental_Awareness') ?? false;
-  //   });
-  // }
-
-  // Future<void> _setSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('Environmental_Awareness', true);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +79,13 @@ class _Environment extends State<Environment> {
                     child: CustomButtons(
                       text: "Save",
                       onpressed: () async {
-                        // if (_isSubmitted) {
-                        //   CustomSnackbar.snackbarShow(
-                        //     context,
-                        //     "Details already submitted.",
-                        //   );
-                        //   return;
-                        // }
+                        if (_isSubmitted) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Details already submitted.",
+                          );
+                          return;
+                        }
                         if (_garden.text.trim().isEmpty ||
                             _aprogram.text.trim().isEmpty ||
                             _trend.text.trim().isEmpty) {
@@ -122,10 +103,9 @@ class _Environment extends State<Environment> {
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);
-                        // await _setSubmissionStatus();
-                        // setState(() {
-                        //   _isSubmitted = true;
-                        // });
+                        setState(() {
+                          _isSubmitted = true;
+                        });
                         setState(() {
                           _next = true;
                         });

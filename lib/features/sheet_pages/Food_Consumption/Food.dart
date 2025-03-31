@@ -5,7 +5,6 @@ import 'package:demo/features/sheet_pages/Food_Consumption/sheets/googlesheet.da
 import 'package:demo/features/sheet_pages/Food_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Food extends StatefulWidget {
   const Food({super.key});
@@ -25,26 +24,8 @@ class _Food extends State<Food> {
   final TextEditingController _rice = TextEditingController();
   final TextEditingController _wheat = TextEditingController();
   final TextEditingController _nuts = TextEditingController();
-  //   bool _isSubmitted = false;
+    bool _isSubmitted = false;
   bool _next = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkSubmissionStatus();
-  // }
-
-  // Future<void> _checkSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _isSubmitted = prefs.getBool('Food_Consumption') ?? false;
-  //   });
-  // }
-
-  // Future<void> _setSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('Food_Consumption', true);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -207,11 +188,11 @@ class _Food extends State<Food> {
                     child: CustomButtons(
                       text: "Save",
                       onpressed: () async {
-                        // if (_isSubmitted) {
-                        //   CustomSnackbar.snackbarShow(
-                        //       context, "Details already submitted.");
-                        //   return;
-                        // }
+                        if (_isSubmitted) {
+                          CustomSnackbar.snackbarShow(
+                              context, "Details already submitted.");
+                          return;
+                        }
                         if (_diet.text.trim().isEmpty ||
                             _beef.text.trim().isEmpty ||
                             _pork.text.trim().isEmpty ||
@@ -243,10 +224,9 @@ class _Food extends State<Food> {
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);
-                        // await _setSubmissionStatus();
-                        // setState(() {
-                        //   _isSubmitted = true;
-                        // });
+                        setState(() {
+                          _isSubmitted = true;
+                        });
                         setState(() {
                           _next = true;
                         });

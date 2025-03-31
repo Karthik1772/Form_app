@@ -5,7 +5,6 @@ import 'package:demo/features/sheet_pages/Energy_Consumption/sheets/googlesheet.
 import 'package:demo/features/sheet_pages/Energy_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Energy extends StatefulWidget {
   const Energy({super.key});
@@ -19,26 +18,8 @@ class _Energy extends State<Energy> {
   final TextEditingController _energy = TextEditingController();
   final TextEditingController _month = TextEditingController();
 
-  // bool _isSubmitted = false;
+  bool _isSubmitted = false;
   bool _next = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkSubmissionStatus();
-  // }
-
-  // Future<void> _checkSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _isSubmitted = prefs.getBool('Energy_Consumption') ?? false;
-  //   });
-  // }
-
-  // Future<void> _setSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('Energy_Consumption', true);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +96,11 @@ class _Energy extends State<Energy> {
                     child: CustomButtons(
                       text: "Save",
                       onpressed: () async {
-                        // if (_isSubmitted) {
-                        //   CustomSnackbar.snackbarShow(
-                        //       context, "Details already submitted.");
-                        //   return;
-                        // }
+                        if (_isSubmitted) {
+                          CustomSnackbar.snackbarShow(
+                              context, "Details already submitted.");
+                          return;
+                        }
                         if (_power.text.trim().isEmpty ||
                             _energy.text.trim().isEmpty ||
                             _month.text.trim().isEmpty) {
@@ -137,10 +118,9 @@ class _Energy extends State<Energy> {
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);
-                        // await _setSubmissionStatus();
-                        // setState(() {
-                        //   _isSubmitted = true;
-                        // });
+                        setState(() {
+                          _isSubmitted = true;
+                        });
                         setState(() {
                           _next = true;
                         });

@@ -20,26 +20,8 @@ class _Occupation extends State<Occupation> {
   final TextEditingController _seminar = TextEditingController();
   final TextEditingController _distance = TextEditingController();
   final TextEditingController _earn = TextEditingController();
-  // bool _isSubmitted = false;
+  bool _isSubmitted = false;
   bool _next = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkSubmissionStatus();
-  // }
-
-  // Future<void> _checkSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _isSubmitted = prefs.getBool('Occupation_Details') ?? false;
-  //   });
-  // }
-
-  // Future<void> _setSubmissionStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setBool('Occupation_Details', true);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +98,11 @@ class _Occupation extends State<Occupation> {
                     child: CustomButtons(
                       text: "Save",
                       onpressed: () async {
-                        // if (_isSubmitted) {
-                        //   CustomSnackbar.snackbarShow(
-                        //       context, "Details already submitted.");
-                        //   return;
-                        // }
+                        if (_isSubmitted) {
+                          CustomSnackbar.snackbarShow(
+                              context, "Details already submitted.");
+                          return;
+                        }
                         if (_business.text.trim().isEmpty ||
                             _aprogram.text.trim().isEmpty ||
                             _seminar.text.trim().isEmpty ||
@@ -142,10 +124,9 @@ class _Occupation extends State<Occupation> {
                         };
 
                         await SheetsFlutter.insert(context, [feedback]);
-                        // await _setSubmissionStatus();
-                        // setState(() {
-                        //   _isSubmitted = true;
-                        // });
+                        setState(() {
+                          _isSubmitted = true;
+                        });
                         setState(() {
                           _next = true;
                         });
