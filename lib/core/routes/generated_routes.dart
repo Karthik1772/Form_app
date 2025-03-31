@@ -1,14 +1,14 @@
-import 'package:demo/features/final_page/final.dart';
-import 'package:demo/features/sheet_pages/Consumer_Choices/customer.dart';
-import 'package:demo/features/sheet_pages/Demographic_Information/Demographic.dart';
-import 'package:demo/features/sheet_pages/Energy_Consumption/energy.dart';
-import 'package:demo/features/sheet_pages/Environmentally_Awareness/Environment.dart';
-import 'package:demo/features/sheet_pages/Food_Consumption/Food.dart';
-import 'package:demo/features/sheet_pages/Miscellaneous_details/Miscellaneous.dart';
-import 'package:demo/features/sheet_pages/Occupation_details/Occupation.dart';
-import 'package:demo/features/sheet_pages/transpotation_details/transportation.dart';
-import 'package:demo/features/sheet_pages/waste_managment/waste.dart';
-import 'package:demo/features/splash_screen/splash.dart';
+import 'package:Formify/features/final_page/final.dart';
+import 'package:Formify/features/sheet_pages/Consumer_Choices/customer.dart';
+import 'package:Formify/features/sheet_pages/Demographic_Information/Demographic.dart';
+import 'package:Formify/features/sheet_pages/Energy_Consumption/energy.dart';
+import 'package:Formify/features/sheet_pages/Environmentally_Awareness/Environment.dart';
+import 'package:Formify/features/sheet_pages/Food_Consumption/Food.dart';
+import 'package:Formify/features/sheet_pages/Miscellaneous_details/Miscellaneous.dart';
+import 'package:Formify/features/sheet_pages/Occupation_details/Occupation.dart';
+import 'package:Formify/features/sheet_pages/transpotation_details/transportation.dart';
+import 'package:Formify/features/sheet_pages/waste_managment/waste.dart';
+import 'package:Formify/features/splash_screen/splash.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
