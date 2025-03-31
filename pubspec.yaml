@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^6.2.1
   gsheets: ^0.5.0
   lottie: ^3.3.1
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -90,3 +91,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"  # Update with your logo path
+  adaptive_icon_foreground: "assets/logo.png"  # For Android Adaptive Icons
+  adaptive_icon_background: "#ffffff"  # Background color for Android

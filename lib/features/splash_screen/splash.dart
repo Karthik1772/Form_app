@@ -64,7 +64,8 @@ class _SplashState extends State<Splash> {
             Container(
               width: 150,
               height: 150,
-              child: Icon(Icons.person, color: AppColors.white, size: 120),
+              // child: Icon(Icons.person, color: AppColors.white, size: 120),
+              child: Image.asset("assets/slogo.png"),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(90),
