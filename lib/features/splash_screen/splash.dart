@@ -55,7 +55,7 @@ class _SplashState extends State<Splash> {
           children: [
             SizedBox(height: 50),
             Text(
-              "Form App",
+              "Formify",
               style: GoogleFonts.varelaRound(
                 fontSize: 30,
                 color: AppColors.white,
