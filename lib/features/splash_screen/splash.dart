@@ -53,23 +53,22 @@ class _SplashState extends State<Splash> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 90),
             Text(
               "Formify",
               style: GoogleFonts.varelaRound(
-                fontSize: 30,
+                fontSize: 35,
                 color: AppColors.white,
               ),
             ),
             Container(
-              width: 150,
-              height: 150,
-              // child: Icon(Icons.person, color: AppColors.white, size: 120),
-              child: Image.asset("assets/slogo.png"),
+              width: 170,
+              height: 170,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(90),
+                borderRadius: BorderRadius.circular(180),
               ),
+              child: Image.asset("assets/slogo.png"),
             ),
             SizedBox(height: 350),
             GestureDetector(
@@ -77,8 +76,8 @@ class _SplashState extends State<Splash> {
                 Navigator.pushNamed(context, '/demographic');
               },
               child: Container(
-                height: 35,
-                width: 150,
+                height: 40,
+                width: 175,
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.white),
                   borderRadius: BorderRadius.circular(50),
@@ -90,18 +89,19 @@ class _SplashState extends State<Splash> {
                       "Get Started",
                       style: GoogleFonts.workSans(
                         color: AppColors.white,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                     ),
                     Icon(
                       Icons.arrow_forward_outlined,
-                      size: 20,
+                      size: 22,
                       color: AppColors.white,
                     ),
                   ],
                 ),
               ),
             ),
+            SizedBox(),
           ],
         ),
       ),
