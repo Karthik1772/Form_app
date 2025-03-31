@@ -23,6 +23,7 @@ class _TransportationState extends State<Transportation> {
   final TextEditingController _pool = TextEditingController();
 
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -174,6 +175,9 @@ class _TransportationState extends State<Transportation> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -181,8 +185,16 @@ class _TransportationState extends State<Transportation> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/environment'),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/environment');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

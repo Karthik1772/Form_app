@@ -20,6 +20,7 @@ class _Energy extends State<Energy> {
   final TextEditingController _month = TextEditingController();
 
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -140,6 +141,9 @@ class _Energy extends State<Energy> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -147,7 +151,16 @@ class _Energy extends State<Energy> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed: () => Navigator.pushNamed(context, '/waste'),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/waste');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

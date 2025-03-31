@@ -26,6 +26,7 @@ class _Food extends State<Food> {
   final TextEditingController _wheat = TextEditingController();
   final TextEditingController _nuts = TextEditingController();
   //   bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -246,6 +247,9 @@ class _Food extends State<Food> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -253,7 +257,16 @@ class _Food extends State<Food> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed: () => Navigator.pushNamed(context, '/energy'),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/energy');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

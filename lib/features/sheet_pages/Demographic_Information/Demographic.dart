@@ -24,6 +24,7 @@ class _DemographicState extends State<Demographic> {
   final TextEditingController _occupation = TextEditingController();
 
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -160,6 +161,9 @@ class _DemographicState extends State<Demographic> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -167,8 +171,16 @@ class _DemographicState extends State<Demographic> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/transportation'),
+                      onpressed: () {
+                        if (_next) {
+                        Navigator.pushNamed(context, '/transportation');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

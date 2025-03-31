@@ -18,6 +18,7 @@ class _Miscellaneous extends State<Miscellaneous> {
   final TextEditingController _flight = TextEditingController();
   final TextEditingController _carbon = TextEditingController();
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -113,6 +114,9 @@ class _Miscellaneous extends State<Miscellaneous> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -120,7 +124,16 @@ class _Miscellaneous extends State<Miscellaneous> {
                   Expanded(
                     child: CustomButtons(
                       text: "Submit",
-                      onpressed: () => Navigator.pushNamed(context, ''),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/final');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

@@ -19,6 +19,7 @@ class _Waste extends State<Waste> {
   final TextEditingController _energy = TextEditingController();
 
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -117,6 +118,9 @@ class _Waste extends State<Waste> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -124,8 +128,16 @@ class _Waste extends State<Waste> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/customer'),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/customer');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:demo/features/final_page/final.dart';
 import 'package:demo/features/sheet_pages/Consumer_Choices/customer.dart';
 import 'package:demo/features/sheet_pages/Demographic_Information/Demographic.dart';
 import 'package:demo/features/sheet_pages/Energy_Consumption/energy.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/material.dart';
 class Routes {
   static Route? onGenerate(RouteSettings settings) {
     switch (settings.name) {
+      case "/splash":
+        return MaterialPageRoute(builder: (context) => Splash());
       case "/demographic":
         return MaterialPageRoute(builder: (context) => Demographic());
       case "/transportation":
@@ -31,8 +34,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => Customer());
       case "/miscellaneous":
         return MaterialPageRoute(builder: (context) => Miscellaneous());
-      case "/splash":
-        return MaterialPageRoute(builder: (context) => Splash());
+      case "/final":
+        return MaterialPageRoute(builder: (context) => FinalPage());
     }
     return null;
   }

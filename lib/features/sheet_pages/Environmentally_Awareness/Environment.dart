@@ -20,6 +20,7 @@ class _Environment extends State<Environment> {
   final TextEditingController _trend = TextEditingController();
 
   // bool _isSubmitted = false;
+  bool _next = false;
 
   // @override
   // void initState() {
@@ -125,6 +126,9 @@ class _Environment extends State<Environment> {
                         // setState(() {
                         //   _isSubmitted = true;
                         // });
+                        setState(() {
+                          _next = true;
+                        });
                       },
                     ),
                   ),
@@ -132,8 +136,16 @@ class _Environment extends State<Environment> {
                   Expanded(
                     child: CustomButtons(
                       text: "Next",
-                      onpressed:
-                          () => Navigator.pushNamed(context, '/occupation'),
+                      onpressed: () {
+                        if (_next) {
+                          Navigator.pushNamed(context, '/occupation');
+                        } else {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Please save the details first!",
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],
