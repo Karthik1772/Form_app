@@ -19,7 +19,7 @@ class CustomDropDown extends StatefulWidget {
     super.key,
     required this.list,
     required this.dropDownController,
-    this.textColor = AppColors.Lightorange,
+    this.textColor = AppColors.lightorange,
     this.fontSize = 14,
     this.textStyle = const TextStyle(),
     this.dropdownWidth = 350,

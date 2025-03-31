@@ -1,23 +1,23 @@
 import 'package:Formify/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/googlesheet.dart'
-    as Demographic;
+    as demographic;
 import 'package:Formify/features/sheet_pages/transpotation_details/sheets/googlesheet.dart'
-    as Transport;
+    as transport;
 import 'package:Formify/features/sheet_pages/Environmentally_Awareness/sheets/googlesheet.dart'
-    as Environment;
+    as environment;
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/googlesheet.dart'
-    as Occupation;
+    as occupation;
 import 'package:Formify/features/sheet_pages/Food_Consumption/sheets/googlesheet.dart'
-    as Food;
+    as food;
 import 'package:Formify/features/sheet_pages/Energy_Consumption/sheets/googlesheet.dart'
-    as Energy;
+    as energy;
 import 'package:Formify/features/sheet_pages/waste_managment/sheets/googlesheet.dart'
-    as Waste;
+    as waste;
 import 'package:Formify/features/sheet_pages/Consumer_Choices/sheets/googlesheet.dart'
-    as Consumer;
+    as consumer;
 import 'package:Formify/features/sheet_pages/Miscellaneous_details/sheets/googlesheet.dart'
-    as Miscellaneous;
+    as miscellaneous;
 import 'package:google_fonts/google_fonts.dart';
 
 class Splash extends StatefulWidget {
@@ -35,17 +35,18 @@ class _SplashState extends State<Splash> {
   }
 
   Future<void> initData() async {
-    await Demographic.SheetsFlutter.init();
-    await Transport.SheetsFlutter.init();
-    await Environment.SheetsFlutter.init();
-    await Occupation.SheetsFlutter.init();
-    await Food.SheetsFlutter.init();
-    await Energy.SheetsFlutter.init();
-    await Waste.SheetsFlutter.init();
-    await Consumer.SheetsFlutter.init();
-    await Miscellaneous.SheetsFlutter.init();
+    await demographic.SheetsFlutter.init();
+    await transport.SheetsFlutter.init();
+    await environment.SheetsFlutter.init();
+    await occupation.SheetsFlutter.init();
+    await food.SheetsFlutter.init();
+    await energy.SheetsFlutter.init();
+    await waste.SheetsFlutter.init();
+    await consumer.SheetsFlutter.init();
+    await miscellaneous.SheetsFlutter.init();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.orange,

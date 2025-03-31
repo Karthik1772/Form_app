@@ -37,7 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         cursorHeight: 18,
         obscureText: isObscure,
         decoration: InputDecoration(
-          hintStyle: TextStyle(color: AppColors.Lightorange),
+          hintStyle: TextStyle(color: AppColors.lightorange),
           hintText: widget.hint,
         ),
       ),
