@@ -1,5 +1,5 @@
-import 'package:demo/core/routes/generated_routes.dart';
-import 'package:demo/core/themes/app_theme.dart';
+import 'package:Formify/core/routes/generated_routes.dart';
+import 'package:Formify/core/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
