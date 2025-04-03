@@ -10,15 +10,13 @@ class CustomSnackbar {
         backgroundColor: AppColors.orange,
         duration: Duration(seconds: 2),
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: EdgeInsets.only(
+          bottom:
+              MediaQuery.of(context).padding.top +
+              50, 
         ),
-        content: Text(
-          text,
-          style: GoogleFonts.poppins(
-            color: AppColors.white,
-          ),
-        ),
+        content: Text(text, style: GoogleFonts.poppins(color: AppColors.white)),
       ),
     );
   }
