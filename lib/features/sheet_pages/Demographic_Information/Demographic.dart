@@ -108,11 +108,14 @@ class _DemographicState extends State<Demographic> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Next",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
-                              context, "Details already submitted.");
+                            context,
+                            "Details already submitted.",
+                          );
+                          Navigator.pushNamed(context, '/transportation');
                           return;
                         }
                         if (_name.text.trim().isEmpty ||
@@ -144,21 +147,8 @@ class _DemographicState extends State<Demographic> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () {
                         if (_next) {
-                        Navigator.pushNamed(context, '/transportation');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
+                          Navigator.pushNamed(context, '/transportation');
                         }
                       },
                     ),

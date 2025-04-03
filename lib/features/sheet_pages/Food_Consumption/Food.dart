@@ -24,7 +24,7 @@ class _Food extends State<Food> {
   final TextEditingController _rice = TextEditingController();
   final TextEditingController _wheat = TextEditingController();
   final TextEditingController _nuts = TextEditingController();
-    bool _isSubmitted = false;
+  bool _isSubmitted = false;
   bool _next = false;
 
   @override
@@ -186,11 +186,14 @@ class _Food extends State<Food> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Next",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
-                              context, "Details already submitted.");
+                            context,
+                            "Details already submitted.",
+                          );
+                          Navigator.pushNamed(context, '/energy');
                           return;
                         }
                         if (_diet.text.trim().isEmpty ||
@@ -230,21 +233,8 @@ class _Food extends State<Food> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () {
                         if (_next) {
                           Navigator.pushNamed(context, '/energy');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
                         }
                       },
                     ),

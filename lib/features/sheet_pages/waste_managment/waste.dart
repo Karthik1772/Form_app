@@ -74,11 +74,14 @@ class _Waste extends State<Waste> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Next",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
-                              context, "Details already submitted.");
+                            context,
+                            "Details already submitted.",
+                          );
+                          Navigator.pushNamed(context, '/customer');
                           return;
                         }
                         if (_power.text.trim().isEmpty ||
@@ -102,21 +105,8 @@ class _Waste extends State<Waste> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () {
                         if (_next) {
                           Navigator.pushNamed(context, '/customer');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
                         }
                       },
                     ),

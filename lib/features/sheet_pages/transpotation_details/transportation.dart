@@ -121,13 +121,14 @@ class _TransportationState extends State<Transportation> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Next",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
                             context,
                             "Details already submitted.",
                           );
+                          Navigator.pushNamed(context, '/environment');
                           return;
                         }
                         if (_primary.text.trim().isEmpty ||
@@ -159,21 +160,8 @@ class _TransportationState extends State<Transportation> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () {
                         if (_next) {
                           Navigator.pushNamed(context, '/environment');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
                         }
                       },
                     ),

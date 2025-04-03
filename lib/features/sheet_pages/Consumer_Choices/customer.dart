@@ -95,11 +95,14 @@ class _Customer extends State<Customer> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Next",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
-                              context, "Details already submitted.");
+                            context,
+                            "Details already submitted.",
+                          );
+                          Navigator.pushNamed(context, '/miscellaneous');
                           return;
                         }
                         if (_buy.text.trim().isEmpty ||
@@ -125,21 +128,8 @@ class _Customer extends State<Customer> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () {
                         if (_next) {
-                        Navigator.pushNamed(context, '/miscellaneous');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
+                          Navigator.pushNamed(context, '/miscellaneous');
                         }
                       },
                     ),

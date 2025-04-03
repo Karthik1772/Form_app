@@ -20,7 +20,6 @@ class _Miscellaneous extends State<Miscellaneous> {
   bool _isSubmitted = false;
   bool _next = false;
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,11 +70,14 @@ class _Miscellaneous extends State<Miscellaneous> {
                 children: [
                   Expanded(
                     child: CustomButtons(
-                      text: "Save",
+                      text: "Submit",
                       onpressed: () async {
                         if (_isSubmitted) {
                           CustomSnackbar.snackbarShow(
-                              context, "Details already submitted.");
+                            context,
+                            "Details already submitted.",
+                          );
+                          Navigator.pushNamed(context, '/final');
                           return;
                         }
                         if (_flight.text.trim().isEmpty ||
@@ -99,21 +101,8 @@ class _Miscellaneous extends State<Miscellaneous> {
                         setState(() {
                           _next = true;
                         });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Submit",
-                      onpressed: () {
                         if (_next) {
                           Navigator.pushNamed(context, '/final');
-                        } else {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please save the details first!",
-                          );
                         }
                       },
                     ),
