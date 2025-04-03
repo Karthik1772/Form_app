@@ -12,9 +12,9 @@ class CustomSnackbar {
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         margin: EdgeInsets.only(
-          bottom:
-              MediaQuery.of(context).padding.top +
-              50, 
+          bottom: MediaQuery.of(context).padding.top + 50,
+          right: 10,
+          left: 10,
         ),
         content: Text(text, style: GoogleFonts.poppins(color: AppColors.white)),
       ),
