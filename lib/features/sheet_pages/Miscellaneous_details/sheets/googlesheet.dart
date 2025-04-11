@@ -48,15 +48,23 @@ class SheetsFlutter {
     }
   }
 
-  static Future insert(BuildContext context, List<Map<String, dynamic>> rowList) async {
+  static Future insert(
+    BuildContext context,
+    List<Map<String, dynamic>> rowList,
+  ) async {
     try {
-      if (rowList.isEmpty || rowList.any((row) => row.values.contains(null) || row.values.contains(""))) {
-        CustomSnackbar.snackbarShow(context, "Please fill all required fields!");
+      if (rowList.isEmpty ||
+          rowList.any(
+            (row) => row.values.contains(null) || row.values.contains(""),
+          )) {
+        CustomSnackbar.snackbarShow(
+          context,
+          "Please fill all required fields!",
+        );
         return;
       }
 
       await _userSheet!.values.map.appendRows(rowList);
-      CustomSnackbar.snackbarShow(context, "Details saved successfully!");
     } catch (e) {
       CustomSnackbar.snackbarShow(context, "Server error. Try again!");
     }
