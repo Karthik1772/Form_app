@@ -19,10 +19,9 @@ class _Environment extends State<Environment> {
   final TextEditingController _aprogram = TextEditingController();
   final TextEditingController _trend = TextEditingController();
 
-  bool _isSubmitted = false;
   bool _next = false;
 
- @override
+  @override
   void initState() {
     super.initState();
     final data = FormDataService.instance.getData();
@@ -33,107 +32,99 @@ class _Environment extends State<Environment> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Environmental Awareness",
-            style: GoogleFonts.varelaRound(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Environmental Awareness",
+              style: GoogleFonts.varelaRound(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomDropDown(
-                        list: ["Yes", "No"],
-                        dropDownController: _garden,
-                        hintText: "Do you do gardening",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: ["Yes", "No"],
-                        dropDownController: _aprogram,
-                        hintText: "Do you attends awareness programs",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: ["Yes", "No"],
-                        dropDownController: _trend,
-                        hintText:
-                            'Are you aware of trending sustainable features',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () async {
-                        if (_isSubmitted) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Details already submitted.",
-                          );
-                          Navigator.pushNamed(context, '/occupation');
-                          return;
-                        }
-                        if (_garden.text.trim().isEmpty ||
-                            _aprogram.text.trim().isEmpty ||
-                            _trend.text.trim().isEmpty) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please fill all required fields!",
-                          );
-                          return;
-                        }
-                        FormDataService.instance.saveData({
-                          SheetsColumn.garden: _garden.text.trim(),
-                          SheetsColumn.aprogram: _aprogram.text.trim(),
-                          SheetsColumn.trend: _trend.text.trim(),
-                        });
-                        final feedback = {
-                          SheetsColumn.garden: _garden.text.trim(),
-                          SheetsColumn.aprogram: _aprogram.text.trim(),
-                          SheetsColumn.trend: _trend.text.trim(),
-                        };
-
-                        await SheetsFlutter.insert(context, [feedback]);
-                        setState(() {
-                          _isSubmitted = true;
-                        });
-                        setState(() {
-                          _next = true;
-                        });
-                        if (_next) {
-                          Navigator.pushNamed(context, '/occupation');
-                        }
-                      },
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(height: 20),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomDropDown(
+                          list: ["Yes", "No"],
+                          dropDownController: _garden,
+                          hintText: "Do you do gardening",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: ["Yes", "No"],
+                          dropDownController: _aprogram,
+                          hintText: "Do you attends awareness programs",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: ["Yes", "No"],
+                          dropDownController: _trend,
+                          hintText:
+                              'Are you aware of trending sustainable features',
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-            ],
+                ),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButtons(
+                        text: "Next",
+                        onpressed: () async {
+                          if (_garden.text.trim().isEmpty ||
+                              _aprogram.text.trim().isEmpty ||
+                              _trend.text.trim().isEmpty) {
+                            CustomSnackbar.snackbarShow(
+                              context,
+                              "Please fill all required fields!",
+                            );
+                            return;
+                          }
+                          FormDataService.instance.saveData({
+                            SheetsColumn.garden: _garden.text.trim(),
+                            SheetsColumn.aprogram: _aprogram.text.trim(),
+                            SheetsColumn.trend: _trend.text.trim(),
+                          });
+                          final feedback = {
+                            SheetsColumn.garden: _garden.text.trim(),
+                            SheetsColumn.aprogram: _aprogram.text.trim(),
+                            SheetsColumn.trend: _trend.text.trim(),
+                          };
+
+                          await SheetsFlutter.insert(context, [feedback]);
+                          setState(() {
+                            _next = true;
+                          });
+                          if (_next) {
+                            Navigator.pushNamed(context, '/occupation');
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

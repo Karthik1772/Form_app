@@ -19,7 +19,6 @@ class _Energy extends State<Energy> {
   final TextEditingController _energy = TextEditingController();
   final TextEditingController _month = TextEditingController();
 
-  bool _isSubmitted = false;
   bool _next = false;
 
   @override
@@ -33,124 +32,116 @@ class _Energy extends State<Energy> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Energy Consumption",
-            style: GoogleFonts.varelaRound(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: ()async => false,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Energy Consumption",
+              style: GoogleFonts.varelaRound(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomDropDown(
-                        list: [
-                          "Electricity from the grid",
-                          "Solar power",
-                          "Wind power",
-                          "Other",
-                        ],
-                        dropDownController: _power,
-                        hintText: "Primary source of energy for your home:",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "Always",
-                          "Often",
-                          "Occasionally",
-                          "Rarely",
-                          "Never",
-                        ],
-                        dropDownController: _energy,
-                        hintText:
-                            "Do you use energy-efficient appliances and light bulbs?",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "Less than 100 kWh",
-                          "100-300 kWh",
-                          "300-500 kWh",
-                          "More than 500 kWh",
-                        ],
-                        dropDownController: _month,
-                        hintText:
-                            "Average monthly electricity consumption (in kWh):",
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () async {
-                        if (_isSubmitted) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Details already submitted.",
-                          );
-                          Navigator.pushNamed(context, '/waste');
-                          return;
-                        }
-                        if (_power.text.trim().isEmpty ||
-                            _energy.text.trim().isEmpty ||
-                            _month.text.trim().isEmpty) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please fill all required fields!",
-                          );
-                          return;
-                        }
-                        FormDataService.instance.saveData({
-                          SheetsColumn.power: _power.text.trim(),
-                          SheetsColumn.energy: _energy.text.trim(),
-                          SheetsColumn.month: _month.text.trim(),
-                        });
-                        final feedback = {
-                          SheetsColumn.power: _power.text.trim(),
-                          SheetsColumn.energy: _energy.text.trim(),
-                          SheetsColumn.month: _month.text.trim(),
-                        };
-
-                        await SheetsFlutter.insert(context, [feedback]);
-                        setState(() {
-                          _isSubmitted = true;
-                        });
-                        setState(() {
-                          _next = true;
-                        });
-                        if (_next) {
-                          Navigator.pushNamed(context, '/waste');
-                        }
-                      },
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(height: 20),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomDropDown(
+                          list: [
+                            "Electricity from the grid",
+                            "Solar power",
+                            "Wind power",
+                            "Other",
+                          ],
+                          dropDownController: _power,
+                          hintText: "Primary source of energy for your home:",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "Always",
+                            "Often",
+                            "Occasionally",
+                            "Rarely",
+                            "Never",
+                          ],
+                          dropDownController: _energy,
+                          hintText:
+                              "Do you use energy-efficient appliances and light bulbs?",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "Less than 100 kWh",
+                            "100-300 kWh",
+                            "300-500 kWh",
+                            "More than 500 kWh",
+                          ],
+                          dropDownController: _month,
+                          hintText:
+                              "Average monthly electricity consumption (in kWh):",
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-            ],
+                ),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButtons(
+                        text: "Next",
+                        onpressed: () async {
+                          if (_power.text.trim().isEmpty ||
+                              _energy.text.trim().isEmpty ||
+                              _month.text.trim().isEmpty) {
+                            CustomSnackbar.snackbarShow(
+                              context,
+                              "Please fill all required fields!",
+                            );
+                            return;
+                          }
+                          FormDataService.instance.saveData({
+                            SheetsColumn.power: _power.text.trim(),
+                            SheetsColumn.energy: _energy.text.trim(),
+                            SheetsColumn.month: _month.text.trim(),
+                          });
+                          final feedback = {
+                            SheetsColumn.power: _power.text.trim(),
+                            SheetsColumn.energy: _energy.text.trim(),
+                            SheetsColumn.month: _month.text.trim(),
+                          };
+      
+                          await SheetsFlutter.insert(context, [feedback]);
+                          setState(() {
+                            _next = true;
+                          });
+                          if (_next) {
+                            Navigator.pushNamed(context, '/waste');
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

@@ -25,7 +25,7 @@ class _Food extends State<Food> {
   final TextEditingController _rice = TextEditingController();
   final TextEditingController _wheat = TextEditingController();
   final TextEditingController _nuts = TextEditingController();
-  bool _isSubmitted = false;
+
   bool _next = false;
 
   @override
@@ -46,233 +46,225 @@ class _Food extends State<Food> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Food Consumption",
-            style: GoogleFonts.varelaRound(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async=> false,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Food Consumption",
+              style: GoogleFonts.varelaRound(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomDropDown(
-                        list: [
-                          "High meat",
-                          "Medium meat",
-                          "Low meat",
-                          "Vegetarian",
-                          "Vegan",
-                          "Pescetarian",
-                          "Other",
-                        ],
-                        dropDownController: _diet,
-                        hintText: "	Type of diet consumed:",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _beef,
-                        hintText:
-                            "how much beef you consume per week (in kgs):",
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _pork,
-                        hintText:
-                            'how much pork you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _mutton,
-                        hintText:
-                            'how much mutton you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _milk,
-                        hintText:
-                            'how much milk you consume per week (in litres):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _potato,
-                        hintText:
-                            'how much potato you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _vegetables,
-                        hintText:
-                            'how much vegetables you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _rice,
-                        hintText:
-                            'how much rice you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _wheat,
-                        hintText:
-                            'how much other wheat/flour you consume per week (in kgs):',
-                      ),
-                      const SizedBox(height: 50),
-                      CustomDropDown(
-                        list: [
-                          "More than 0.5",
-                          "0.25 - 0.5",
-                          "Up To 0.25",
-                          "Never",
-                        ],
-                        dropDownController: _nuts,
-                        hintText:
-                            'how much nuts you consume per week (in kgs):',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: CustomButtons(
-                      text: "Next",
-                      onpressed: () async {
-                        if (_isSubmitted) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Details already submitted.",
-                          );
-                          Navigator.pushNamed(context, '/energy');
-                          return;
-                        }
-                        if (_diet.text.trim().isEmpty ||
-                            _beef.text.trim().isEmpty ||
-                            _pork.text.trim().isEmpty ||
-                            _mutton.text.trim().isEmpty ||
-                            _milk.text.trim().isEmpty ||
-                            _potato.text.trim().isEmpty ||
-                            _vegetables.text.trim().isEmpty ||
-                            _rice.text.trim().isEmpty ||
-                            _wheat.text.trim().isEmpty ||
-                            _nuts.text.trim().isEmpty) {
-                          CustomSnackbar.snackbarShow(
-                            context,
-                            "Please fill all required fields!",
-                          );
-                          return;
-                        }
-
-                        FormDataService.instance.saveData({
-                          SheetsColumn.diet: _diet.text.trim(),
-                          SheetsColumn.beef: _beef.text.trim(),
-                          SheetsColumn.pork: _pork.text.trim(),
-                          SheetsColumn.mutton: _mutton.text.trim(),
-                          SheetsColumn.milk: _milk.text.trim(),
-                          SheetsColumn.potato: _potato.text.trim(),
-                          SheetsColumn.vegetables: _vegetables.text.trim(),
-                          SheetsColumn.rice: _rice.text.trim(),
-                          SheetsColumn.wheat: _wheat.text.trim(),
-                          SheetsColumn.nuts: _nuts.text.trim(),
-                        });
-
-                        final feedback = {
-                          SheetsColumn.diet: _diet.text.trim(),
-                          SheetsColumn.beef: _beef.text.trim(),
-                          SheetsColumn.pork: _pork.text.trim(),
-                          SheetsColumn.mutton: _mutton.text.trim(),
-                          SheetsColumn.milk: _milk.text.trim(),
-                          SheetsColumn.potato: _potato.text.trim(),
-                          SheetsColumn.vegetables: _vegetables.text.trim(),
-                          SheetsColumn.rice: _rice.text.trim(),
-                          SheetsColumn.wheat: _wheat.text.trim(),
-                          SheetsColumn.nuts: _nuts.text.trim(),
-                        };
-
-                        await SheetsFlutter.insert(context, [feedback]);
-                        setState(() {
-                          _isSubmitted = true;
-                        });
-                        setState(() {
-                          _next = true;
-                        });
-                        if (_next) {
-                          Navigator.pushNamed(context, '/energy');
-                        }
-                      },
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(height: 20),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomDropDown(
+                          list: [
+                            "High meat",
+                            "Medium meat",
+                            "Low meat",
+                            "Vegetarian",
+                            "Vegan",
+                            "Pescetarian",
+                            "Other",
+                          ],
+                          dropDownController: _diet,
+                          hintText: "	Type of diet consumed:",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _beef,
+                          hintText:
+                              "how much beef you consume per week (in kgs):",
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _pork,
+                          hintText:
+                              'how much pork you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _mutton,
+                          hintText:
+                              'how much mutton you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _milk,
+                          hintText:
+                              'how much milk you consume per week (in litres):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _potato,
+                          hintText:
+                              'how much potato you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _vegetables,
+                          hintText:
+                              'how much vegetables you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _rice,
+                          hintText:
+                              'how much rice you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _wheat,
+                          hintText:
+                              'how much other wheat/flour you consume per week (in kgs):',
+                        ),
+                        const SizedBox(height: 50),
+                        CustomDropDown(
+                          list: [
+                            "More than 0.5",
+                            "0.25 - 0.5",
+                            "Up To 0.25",
+                            "Never",
+                          ],
+                          dropDownController: _nuts,
+                          hintText:
+                              'how much nuts you consume per week (in kgs):',
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-            ],
+                ),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButtons(
+                        text: "Next",
+                        onpressed: () async {
+                          if (_diet.text.trim().isEmpty ||
+                              _beef.text.trim().isEmpty ||
+                              _pork.text.trim().isEmpty ||
+                              _mutton.text.trim().isEmpty ||
+                              _milk.text.trim().isEmpty ||
+                              _potato.text.trim().isEmpty ||
+                              _vegetables.text.trim().isEmpty ||
+                              _rice.text.trim().isEmpty ||
+                              _wheat.text.trim().isEmpty ||
+                              _nuts.text.trim().isEmpty) {
+                            CustomSnackbar.snackbarShow(
+                              context,
+                              "Please fill all required fields!",
+                            );
+                            return;
+                          }
+      
+                          FormDataService.instance.saveData({
+                            SheetsColumn.diet: _diet.text.trim(),
+                            SheetsColumn.beef: _beef.text.trim(),
+                            SheetsColumn.pork: _pork.text.trim(),
+                            SheetsColumn.mutton: _mutton.text.trim(),
+                            SheetsColumn.milk: _milk.text.trim(),
+                            SheetsColumn.potato: _potato.text.trim(),
+                            SheetsColumn.vegetables: _vegetables.text.trim(),
+                            SheetsColumn.rice: _rice.text.trim(),
+                            SheetsColumn.wheat: _wheat.text.trim(),
+                            SheetsColumn.nuts: _nuts.text.trim(),
+                          });
+      
+                          final feedback = {
+                            SheetsColumn.diet: _diet.text.trim(),
+                            SheetsColumn.beef: _beef.text.trim(),
+                            SheetsColumn.pork: _pork.text.trim(),
+                            SheetsColumn.mutton: _mutton.text.trim(),
+                            SheetsColumn.milk: _milk.text.trim(),
+                            SheetsColumn.potato: _potato.text.trim(),
+                            SheetsColumn.vegetables: _vegetables.text.trim(),
+                            SheetsColumn.rice: _rice.text.trim(),
+                            SheetsColumn.wheat: _wheat.text.trim(),
+                            SheetsColumn.nuts: _nuts.text.trim(),
+                          };
+      
+                          await SheetsFlutter.insert(context, [feedback]);
+                          setState(() {
+                            _next = true;
+                          });
+                          if (_next) {
+                            Navigator.pushNamed(context, '/energy');
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
