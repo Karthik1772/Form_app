@@ -1,6 +1,7 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Consumer_Choices/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Consumer_Choices/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,15 @@ class _Customer extends State<Customer> {
   final TextEditingController _carbon = TextEditingController();
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _buy.text = data[SheetsColumn.buy] ?? '';
+    _reduce.text = data[SheetsColumn.reduce] ?? '';
+    _carbon.text = data[SheetsColumn.carbon] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +124,12 @@ class _Customer extends State<Customer> {
                           );
                           return;
                         }
+
+                        FormDataService.instance.saveData({
+                          SheetsColumn.buy: _buy.text.trim(),
+                          SheetsColumn.reduce: _reduce.text.trim(),
+                          SheetsColumn.carbon: _carbon.text.trim(),
+                        });
 
                         final feedback = {
                           SheetsColumn.buy: _buy.text.trim(),

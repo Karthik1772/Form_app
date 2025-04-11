@@ -1,11 +1,11 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/transpotation_details/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/transpotation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Transportation extends StatefulWidget {
   const Transportation({super.key});
@@ -24,6 +24,18 @@ class _TransportationState extends State<Transportation> {
 
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _primary.text = data[SheetsColumn.primary] ?? '';
+    _hybrid.text = data[SheetsColumn.hybrid] ?? '';
+    _frequency.text = data[SheetsColumn.frequency] ?? '';
+    _pattern.text = data[SheetsColumn.pattern] ?? '';
+    _distance.text = data[SheetsColumn.distance] ?? '';
+    _pool.text = data[SheetsColumn.pool] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,12 +155,19 @@ class _TransportationState extends State<Transportation> {
                           );
                           return;
                         }
-
+                        FormDataService.instance.saveData({
+                          SheetsColumn.primary: _primary.text.trim(),
+                          SheetsColumn.hybrid: _hybrid.text.trim(),
+                          SheetsColumn.frequency: _frequency.text.trim(),
+                          SheetsColumn.pattern: _pattern.text.trim(),
+                          SheetsColumn.distance: _distance.text.trim(),
+                          SheetsColumn.pool: _pool.text.trim(),
+                        });
                         final feedback = {
                           SheetsColumn.primary: _primary.text.trim(),
                           SheetsColumn.hybrid: _hybrid.text.trim(),
                           SheetsColumn.frequency: _frequency.text.trim(),
-                          SheetsColumn.Pattern: _pattern.text.trim(),
+                          SheetsColumn.pattern: _pattern.text.trim(),
                           SheetsColumn.distance: _distance.text.trim(),
                           SheetsColumn.pool: _pool.text.trim(),
                         };

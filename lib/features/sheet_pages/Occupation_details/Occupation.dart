@@ -1,11 +1,11 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Occupation extends StatefulWidget {
   const Occupation({super.key});
@@ -22,6 +22,17 @@ class _Occupation extends State<Occupation> {
   final TextEditingController _earn = TextEditingController();
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _business.text = data[SheetsColumn.business] ?? '';
+    _aprogram.text = data[SheetsColumn.aprogram] ?? '';
+    _seminar.text = data[SheetsColumn.seminar] ?? '';
+    _distance.text = data[SheetsColumn.distance] ?? '';
+    _earn.text = data[SheetsColumn.earn] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +128,14 @@ class _Occupation extends State<Occupation> {
                           );
                           return;
                         }
+
+                        FormDataService.instance.saveData({
+                          SheetsColumn.business: _business.text.trim(),
+                          SheetsColumn.aprogram: _aprogram.text.trim(),
+                          SheetsColumn.seminar: _seminar.text.trim(),
+                          SheetsColumn.distance: _distance.text.trim(),
+                          SheetsColumn.earn: _earn.text.trim(),
+                        });
 
                         final feedback = {
                           SheetsColumn.business: _business.text.trim(),

@@ -1,6 +1,7 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Energy_Consumption/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Energy_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,15 @@ class _Energy extends State<Energy> {
 
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _power.text = data[SheetsColumn.power] ?? '';
+    _energy.text = data[SheetsColumn.energy] ?? '';
+    _month.text = data[SheetsColumn.month] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +123,11 @@ class _Energy extends State<Energy> {
                           );
                           return;
                         }
-
+                        FormDataService.instance.saveData({
+                          SheetsColumn.power: _power.text.trim(),
+                          SheetsColumn.energy: _energy.text.trim(),
+                          SheetsColumn.month: _month.text.trim(),
+                        });
                         final feedback = {
                           SheetsColumn.power: _power.text.trim(),
                           SheetsColumn.energy: _energy.text.trim(),

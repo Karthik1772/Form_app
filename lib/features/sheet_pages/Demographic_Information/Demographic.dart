@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/common/custom_textfield.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,18 @@ class _DemographicState extends State<Demographic> {
 
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _name.text = data[SheetsColumn.name] ?? '';
+    _email.text = data[SheetsColumn.email] ?? '';
+    _age.text = data[SheetsColumn.age] ?? '';
+    _gender.text = data[SheetsColumn.gender] ?? '';
+    _location.text = data[SheetsColumn.location] ?? '';
+    _occupation.text = data[SheetsColumn.occupation] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +65,6 @@ class _DemographicState extends State<Demographic> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomTextField(controller: _name, hint: "Name"),
                       const SizedBox(height: 50),
@@ -131,6 +143,25 @@ class _DemographicState extends State<Demographic> {
                           return;
                         }
 
+                        final existing = await SheetsFlutter.checkIfEmailExists(
+                          _email.text.trim(),
+                        );
+                        if (existing) {
+                          CustomSnackbar.snackbarShow(
+                            context,
+                            "Details already submitted from this email.",
+                          );
+                          return;
+                        }
+
+                        FormDataService.instance.saveData({
+                          SheetsColumn.name: _name.text.trim(),
+                          SheetsColumn.email: _email.text.trim(),
+                          SheetsColumn.age: _age.text.trim(),
+                          SheetsColumn.gender: _gender.text.trim(),
+                          SheetsColumn.location: _location.text.trim(),
+                          SheetsColumn.occupation: _occupation.text.trim(),
+                        });
                         final feedback = {
                           SheetsColumn.name: _name.text.trim(),
                           SheetsColumn.email: _email.text.trim(),
@@ -155,7 +186,7 @@ class _DemographicState extends State<Demographic> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

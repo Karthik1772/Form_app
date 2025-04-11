@@ -26,6 +26,19 @@ class SheetsFlutter {
   static final _gsheet = GSheets(jsonEncode(_credentials));
   static Worksheet? _userSheet;
 
+static Future<bool> checkIfEmailExists(String email) async {
+  if (_userSheet == null) return false;
+  final values = await _userSheet!.values.allRows();
+  final emailColumnIndex = SheetsColumn.getColumns().indexOf(SheetsColumn.email);
+
+  for (final row in values) {
+    if (row.length > emailColumnIndex && row[emailColumnIndex] == email) {
+      return true;
+    }
+  }
+  return false;
+}
+
   static Future init() async {
     try {
       final spreadsheet = await _gsheet.spreadsheet(_sheetId);

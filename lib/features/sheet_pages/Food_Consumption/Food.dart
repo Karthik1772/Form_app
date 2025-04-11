@@ -1,6 +1,7 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Food_Consumption/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Food_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,22 @@ class _Food extends State<Food> {
   final TextEditingController _nuts = TextEditingController();
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _diet.text = data[SheetsColumn.diet] ?? '';
+    _beef.text = data[SheetsColumn.beef] ?? '';
+    _pork.text = data[SheetsColumn.pork] ?? '';
+    _mutton.text = data[SheetsColumn.mutton] ?? '';
+    _milk.text = data[SheetsColumn.milk] ?? '';
+    _potato.text = data[SheetsColumn.potato] ?? '';
+    _vegetables.text = data[SheetsColumn.vegetables] ?? '';
+    _rice.text = data[SheetsColumn.rice] ?? '';
+    _wheat.text = data[SheetsColumn.wheat] ?? '';
+    _nuts.text = data[SheetsColumn.nuts] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,6 +229,19 @@ class _Food extends State<Food> {
                           );
                           return;
                         }
+
+                        FormDataService.instance.saveData({
+                          SheetsColumn.diet: _diet.text.trim(),
+                          SheetsColumn.beef: _beef.text.trim(),
+                          SheetsColumn.pork: _pork.text.trim(),
+                          SheetsColumn.mutton: _mutton.text.trim(),
+                          SheetsColumn.milk: _milk.text.trim(),
+                          SheetsColumn.potato: _potato.text.trim(),
+                          SheetsColumn.vegetables: _vegetables.text.trim(),
+                          SheetsColumn.rice: _rice.text.trim(),
+                          SheetsColumn.wheat: _wheat.text.trim(),
+                          SheetsColumn.nuts: _nuts.text.trim(),
+                        });
 
                         final feedback = {
                           SheetsColumn.diet: _diet.text.trim(),

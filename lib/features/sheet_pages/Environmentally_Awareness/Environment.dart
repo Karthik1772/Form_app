@@ -1,6 +1,7 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/Environmentally_Awareness/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Environmentally_Awareness/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,15 @@ class _Environment extends State<Environment> {
 
   bool _isSubmitted = false;
   bool _next = false;
+
+ @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _garden.text = data[SheetsColumn.garden] ?? '';
+    _aprogram.text = data[SheetsColumn.aprogram] ?? '';
+    _trend.text = data[SheetsColumn.trend] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +106,11 @@ class _Environment extends State<Environment> {
                           );
                           return;
                         }
-
+                        FormDataService.instance.saveData({
+                          SheetsColumn.garden: _garden.text.trim(),
+                          SheetsColumn.aprogram: _aprogram.text.trim(),
+                          SheetsColumn.trend: _trend.text.trim(),
+                        });
                         final feedback = {
                           SheetsColumn.garden: _garden.text.trim(),
                           SheetsColumn.aprogram: _aprogram.text.trim(),

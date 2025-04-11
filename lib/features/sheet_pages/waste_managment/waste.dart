@@ -1,11 +1,11 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/features/sheet_pages/waste_managment/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/waste_managment/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Waste extends StatefulWidget {
   const Waste({super.key});
@@ -20,6 +20,14 @@ class _Waste extends State<Waste> {
 
   bool _isSubmitted = false;
   bool _next = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = FormDataService.instance.getData();
+    _power.text = data[SheetsColumn.power] ?? '';
+    _energy.text = data[SheetsColumn.energy] ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +100,11 @@ class _Waste extends State<Waste> {
                           );
                           return;
                         }
+                        
+                        FormDataService.instance.saveData({
+                          SheetsColumn.power: _power.text.trim(),
+                          SheetsColumn.energy: _energy.text.trim(),
+                        });
 
                         final feedback = {
                           SheetsColumn.power: _power.text.trim(),
