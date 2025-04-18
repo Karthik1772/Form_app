@@ -66,7 +66,7 @@ class SheetsFlutter {
       }
 
       await _userSheet!.values.map.appendRows(rowList);
-      CustomSnackbar.snackbarShow(context, "Details saved successfully!");
+      // CustomSnackbar.snackbarShow(context, "Details saved successfully!");
     } catch (e) {
       CustomSnackbar.snackbarShow(context, "Server error. Try again!");
       print("Error inserting data: $e");
