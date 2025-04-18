@@ -100,7 +100,6 @@ class _TransportationState extends State<Transportation> {
                         CustomDropDown(
                           list: [
                             "Steady and mature",
-                            "Steady and mature",
                             "Rash",
                             "No idea",
                           ],
