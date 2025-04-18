@@ -17,7 +17,7 @@ class Miscellaneous extends StatefulWidget {
 class _Miscellaneous extends State<Miscellaneous> {
   final TextEditingController _flight = TextEditingController();
   final TextEditingController _carbon = TextEditingController();
-  
+
   bool _next = false;
 
   @override
@@ -31,7 +31,7 @@ class _Miscellaneous extends State<Miscellaneous> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-    onWillPop: () async=> false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -98,7 +98,7 @@ class _Miscellaneous extends State<Miscellaneous> {
                             SheetsColumn.flight: _flight.text.trim(),
                             SheetsColumn.carbon: _carbon.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;

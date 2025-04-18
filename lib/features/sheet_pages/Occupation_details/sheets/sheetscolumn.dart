@@ -5,12 +5,11 @@ class SheetsColumn {
   static final distance = "How far are you";
   static final earn = "How often do you earn";
 
-
   static List<String> getColumns() => [
-        business,
-        aprogram,
-        seminar,
-        distance,
-        earn,
-      ];
+    business,
+    aprogram,
+    seminar,
+    distance,
+    earn,
+  ];
 }

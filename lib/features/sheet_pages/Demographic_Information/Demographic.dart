@@ -22,7 +22,7 @@ class _DemographicState extends State<Demographic> {
   final TextEditingController _gender = TextEditingController();
   final TextEditingController _location = TextEditingController();
   final TextEditingController _occupation = TextEditingController();
-  
+
   bool _next = false;
 
   @override
@@ -40,7 +40,7 @@ class _DemographicState extends State<Demographic> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async => false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -135,10 +135,11 @@ class _DemographicState extends State<Demographic> {
                             );
                             return;
                           }
-      
-                          final existing = await SheetsFlutter.checkIfEmailExists(
-                            _email.text.trim(),
-                          );
+
+                          final existing =
+                              await SheetsFlutter.checkIfEmailExists(
+                                _email.text.trim(),
+                              );
                           if (existing) {
                             CustomSnackbar.snackbarShow(
                               context,
@@ -146,7 +147,7 @@ class _DemographicState extends State<Demographic> {
                             );
                             return;
                           }
-      
+
                           FormDataService.instance.saveData({
                             SheetsColumn.name: _name.text.trim(),
                             SheetsColumn.email: _email.text.trim(),
@@ -163,7 +164,7 @@ class _DemographicState extends State<Demographic> {
                             SheetsColumn.location: _location.text.trim(),
                             SheetsColumn.occupation: _occupation.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;

@@ -33,7 +33,7 @@ class _Energy extends State<Energy> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async => false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -126,7 +126,7 @@ class _Energy extends State<Energy> {
                             SheetsColumn.energy: _energy.text.trim(),
                             SheetsColumn.month: _month.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;

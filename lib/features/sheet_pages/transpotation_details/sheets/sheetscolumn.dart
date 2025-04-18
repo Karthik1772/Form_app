@@ -7,11 +7,11 @@ class SheetsColumn {
   static final pool = "Do you carpool or share rides";
 
   static List<String> getColumns() => [
-        primary,
-        hybrid,
-        frequency,
-        pattern,
-        distance,
-        pool,
-      ];
+    primary,
+    hybrid,
+    frequency,
+    pattern,
+    distance,
+    pool,
+  ];
 }

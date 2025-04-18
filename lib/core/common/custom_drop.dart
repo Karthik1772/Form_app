@@ -54,7 +54,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
         _isFocused = _focusNode.hasFocus;
       });
     });
-    
+
     _checkIfOtherSelected();
   }
 
@@ -75,8 +75,8 @@ class _CustomDropDownState extends State<CustomDropDown> {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveWidth = widget.dropdownWidth ?? 
-        MediaQuery.of(context).size.width - 40;
+    final effectiveWidth =
+        widget.dropdownWidth ?? MediaQuery.of(context).size.width - 40;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,23 +87,25 @@ class _CustomDropDownState extends State<CustomDropDown> {
           child: Theme(
             data: Theme.of(context).copyWith(
               colorScheme: Theme.of(context).colorScheme.copyWith(
-                    secondary: widget.arrowColor,
-                    onSurface: widget.arrowColor,
-                  ),
+                secondary: widget.arrowColor,
+                onSurface: widget.arrowColor,
+              ),
               iconTheme: IconThemeData(color: widget.arrowColor),
             ),
             child: DropdownMenu<String>(
               controller: widget.dropDownController,
               width: effectiveWidth,
-              initialSelection: widget.dropDownController.text.isNotEmpty ? 
-                  widget.dropDownController.text : null,
+              initialSelection:
+                  widget.dropDownController.text.isNotEmpty
+                      ? widget.dropDownController.text
+                      : null,
               focusNode: _focusNode,
               onSelected: (String? value) {
                 if (value != null) {
                   setState(() {
                     widget.dropDownController.text = value;
                     _showTextField = value == "Other";
-                    
+
                     // If not "Other", clear the other text controller
                     if (value != "Other") {
                       _otherTextController.clear();
@@ -111,25 +113,28 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   });
                 }
               },
-              dropdownMenuEntries: widget.list
-                  .map<DropdownMenuEntry<String>>(
-                    (String value) => DropdownMenuEntry<String>(
-                      value: value,
-                      label: value,
-                      style: ButtonStyle(
-                        textStyle: MaterialStatePropertyAll(
-                          GoogleFonts.varelaRound(
-                            fontSize: widget.fontSize,
+              dropdownMenuEntries:
+                  widget.list
+                      .map<DropdownMenuEntry<String>>(
+                        (String value) => DropdownMenuEntry<String>(
+                          value: value,
+                          label: value,
+                          style: ButtonStyle(
+                            textStyle: MaterialStatePropertyAll(
+                              GoogleFonts.varelaRound(
+                                fontSize: widget.fontSize,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  )
-                  .toList(),
-              textStyle: widget.textStyle ?? GoogleFonts.varelaRound(
-                color: widget.textColor,
-                fontSize: widget.fontSize,
-              ),
+                      )
+                      .toList(),
+              textStyle:
+                  widget.textStyle ??
+                  GoogleFonts.varelaRound(
+                    color: widget.textColor,
+                    fontSize: widget.fontSize,
+                  ),
               menuStyle: MenuStyle(
                 shape: MaterialStatePropertyAll(
                   RoundedRectangleBorder(
@@ -155,13 +160,19 @@ class _CustomDropDownState extends State<CustomDropDown> {
                 ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: _isFocused ? widget.focusedBorderColor : widget.borderColor,
+                    color:
+                        _isFocused
+                            ? widget.focusedBorderColor
+                            : widget.borderColor,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: _isFocused ? widget.focusedBorderColor : widget.borderColor,
+                    color:
+                        _isFocused
+                            ? widget.focusedBorderColor
+                            : widget.borderColor,
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -218,6 +229,12 @@ class _CustomDropDownState extends State<CustomDropDown> {
                 ),
               ),
               onChanged: (value) {
+                // This is the key change - update the main controller value when "Other" field changes
+                if (_showTextField && value.isNotEmpty) {
+                  widget.dropDownController.text = value;
+                } else if (_showTextField) {
+                  widget.dropDownController.text = "Other";
+                }
               },
             ),
           ),

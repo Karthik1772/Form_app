@@ -10,14 +10,14 @@ class FinalPage extends StatefulWidget {
   @override
   State<FinalPage> createState() => _FinalPageState();
 }
-  
+
 class _FinalPageState extends State<FinalPage> {
   @override
   void initState() {
     super.initState();
-    FormDataService.instance.clearData(); 
+    FormDataService.instance.clearData();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

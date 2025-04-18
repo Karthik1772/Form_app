@@ -47,7 +47,7 @@ class _Food extends State<Food> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async=> false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -223,7 +223,7 @@ class _Food extends State<Food> {
                             );
                             return;
                           }
-      
+
                           FormDataService.instance.saveData({
                             SheetsColumn.diet: _diet.text.trim(),
                             SheetsColumn.beef: _beef.text.trim(),
@@ -236,7 +236,7 @@ class _Food extends State<Food> {
                             SheetsColumn.wheat: _wheat.text.trim(),
                             SheetsColumn.nuts: _nuts.text.trim(),
                           });
-      
+
                           final feedback = {
                             SheetsColumn.diet: _diet.text.trim(),
                             SheetsColumn.beef: _beef.text.trim(),
@@ -249,7 +249,7 @@ class _Food extends State<Food> {
                             SheetsColumn.wheat: _wheat.text.trim(),
                             SheetsColumn.nuts: _nuts.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;

@@ -20,7 +20,7 @@ class _Occupation extends State<Occupation> {
   final TextEditingController _seminar = TextEditingController();
   final TextEditingController _distance = TextEditingController();
   final TextEditingController _earn = TextEditingController();
-  
+
   bool _next = false;
 
   @override
@@ -37,7 +37,7 @@ class _Occupation extends State<Occupation> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async=> false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -122,7 +122,7 @@ class _Occupation extends State<Occupation> {
                             );
                             return;
                           }
-      
+
                           FormDataService.instance.saveData({
                             SheetsColumn.business: _business.text.trim(),
                             SheetsColumn.aprogram: _aprogram.text.trim(),
@@ -130,7 +130,7 @@ class _Occupation extends State<Occupation> {
                             SheetsColumn.distance: _distance.text.trim(),
                             SheetsColumn.earn: _earn.text.trim(),
                           });
-      
+
                           final feedback = {
                             SheetsColumn.business: _business.text.trim(),
                             SheetsColumn.aprogram: _aprogram.text.trim(),
@@ -138,7 +138,7 @@ class _Occupation extends State<Occupation> {
                             SheetsColumn.distance: _distance.text.trim(),
                             SheetsColumn.earn: _earn.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;

@@ -14,32 +14,25 @@ class SheetsFlutter {
   static Future init() async {
     try {
       // Load credentials from assets
-      print("Loading credentials from assets...");
-      final credentialsJson = await rootBundle.loadString('google_credentials.json');
-      print("Credentials loaded, parsing JSON...");
+      final credentialsJson = await rootBundle.loadString(
+        'google_credentials.json',
+      );
       final fullConfig = jsonDecode(credentialsJson);
-      
+
       // Extract sheet ID
-      print("Extracting sheet ID...");
       _sheetId = fullConfig['sheet_id'];
-      
+
       // Remove sheet_id from credentials
-      print("Preparing credentials...");
       _credentials = Map<String, dynamic>.from(fullConfig);
       _credentials.remove('sheet_id');
-      
+
       // Initialize GSheets
-      print("Initializing GSheets...");
       _gsheet = GSheets(jsonEncode(_credentials));
-      
-      print("Connecting to spreadsheet...");
       final spreadsheet = await _gsheet.spreadsheet(_sheetId);
-      print("Getting worksheet...");
       _userSheet = await _getWorksheet(spreadsheet, title: "Transport");
-      print("Setting up columns...");
       final firstRow = SheetsColumn.getColumns();
       _userSheet!.values.insertRow(1, firstRow);
-      print("Init completed successfully!");
+      print("Init completed successfully! of Transport.dart");
     } catch (e) {
       print("Error initializing Google Sheets: $e");
       print("Stack trace: ${StackTrace.current}");
@@ -57,10 +50,19 @@ class SheetsFlutter {
     }
   }
 
-  static Future insert(BuildContext context, List<Map<String, dynamic>> rowList) async {
+  static Future insert(
+    BuildContext context,
+    List<Map<String, dynamic>> rowList,
+  ) async {
     try {
-      if (rowList.isEmpty || rowList.any((row) => row.values.contains(null) || row.values.contains(""))) {
-        CustomSnackbar.snackbarShow(context, "Please fill all required fields!");
+      if (rowList.isEmpty ||
+          rowList.any(
+            (row) => row.values.contains(null) || row.values.contains(""),
+          )) {
+        CustomSnackbar.snackbarShow(
+          context,
+          "Please fill all required fields!",
+        );
         return;
       }
 

@@ -39,7 +39,7 @@ class _TransportationState extends State<Transportation> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async=> false,
+      onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -93,7 +93,8 @@ class _TransportationState extends State<Transportation> {
                             "Rarely",
                           ],
                           dropDownController: _frequency,
-                          hintText: 'Frequency of using private transportation:',
+                          hintText:
+                              'Frequency of using private transportation:',
                         ),
                         const SizedBox(height: 50),
                         CustomDropDown(
@@ -164,7 +165,7 @@ class _TransportationState extends State<Transportation> {
                             SheetsColumn.distance: _distance.text.trim(),
                             SheetsColumn.pool: _pool.text.trim(),
                           };
-      
+
                           await SheetsFlutter.insert(context, [feedback]);
                           setState(() {
                             _next = true;
