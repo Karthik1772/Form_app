@@ -38,8 +38,8 @@ class _TransportationState extends State<Transportation> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(

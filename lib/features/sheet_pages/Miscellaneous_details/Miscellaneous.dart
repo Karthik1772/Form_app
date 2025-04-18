@@ -30,8 +30,8 @@ class _Miscellaneous extends State<Miscellaneous> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop:false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(

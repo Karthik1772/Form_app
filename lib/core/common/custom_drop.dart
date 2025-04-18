@@ -120,7 +120,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           value: value,
                           label: value,
                           style: ButtonStyle(
-                            textStyle: MaterialStatePropertyAll(
+                            textStyle: WidgetStatePropertyAll(
                               GoogleFonts.varelaRound(
                                 fontSize: widget.fontSize,
                               ),
@@ -136,7 +136,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                     fontSize: widget.fontSize,
                   ),
               menuStyle: MenuStyle(
-                shape: MaterialStatePropertyAll(
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -183,13 +183,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                suffixIconColor: MaterialStateColor.resolveWith(
+                suffixIconColor: WidgetStateColor.resolveWith(
                   (states) => widget.arrowColor,
                 ),
-                prefixIconColor: MaterialStateColor.resolveWith(
+                prefixIconColor: WidgetStateColor.resolveWith(
                   (states) => widget.arrowColor,
                 ),
-                iconColor: MaterialStateColor.resolveWith(
+                iconColor: WidgetStateColor.resolveWith(
                   (states) => widget.arrowColor,
                 ),
               ),

@@ -32,8 +32,8 @@ class _Energy extends State<Energy> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop:  false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
