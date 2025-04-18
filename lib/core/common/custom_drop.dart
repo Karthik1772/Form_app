@@ -7,13 +7,14 @@ class CustomDropDown extends StatefulWidget {
   final TextEditingController dropDownController;
   final Color textColor;
   final double fontSize;
-  final TextStyle textStyle;
-  final double dropdownWidth;
+  final TextStyle? textStyle;
+  final double? dropdownWidth;
   final double dropdownHeight;
   final Color borderColor;
   final Color focusedBorderColor;
   final Color arrowColor;
   final String hintText;
+  final String? initialValue;
 
   const CustomDropDown({
     super.key,
@@ -21,13 +22,14 @@ class CustomDropDown extends StatefulWidget {
     required this.dropDownController,
     this.textColor = AppColors.lightorange,
     this.fontSize = 14,
-    this.textStyle = const TextStyle(),
-    this.dropdownWidth = 350,
+    this.textStyle,
+    this.dropdownWidth,
     this.dropdownHeight = 50,
     this.borderColor = Colors.grey,
     this.focusedBorderColor = AppColors.orange,
     this.arrowColor = AppColors.orange,
     required this.hintText,
+    this.initialValue,
   });
 
   @override
@@ -35,160 +37,191 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-  late String dropdownValue;
   final FocusNode _focusNode = FocusNode();
   bool _isFocused = false;
-  bool _isOpen = false;
+  bool _showTextField = false;
+  final TextEditingController _otherTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    dropdownValue = widget.list.isNotEmpty ? widget.list.first : "Select";
+    if (widget.dropDownController.text.isEmpty && widget.initialValue != null) {
+      widget.dropDownController.text = widget.initialValue!;
+    }
 
     _focusNode.addListener(() {
       setState(() {
         _isFocused = _focusNode.hasFocus;
-        if (_focusNode.hasFocus) {
-          _isOpen = true;
-        }
       });
     });
+    
+    _checkIfOtherSelected();
+  }
+
+  void _checkIfOtherSelected() {
+    if (widget.dropDownController.text == "Other") {
+      setState(() {
+        _showTextField = true;
+      });
+    }
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    _otherTextController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color unfocusedColor = Colors.grey;
+    final effectiveWidth = widget.dropdownWidth ?? 
+        MediaQuery.of(context).size.width - 40;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      width: widget.dropdownWidth,
-      child: Builder(
-        builder: (BuildContext context) {
-          return Theme(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          width: effectiveWidth,
+          child: Theme(
             data: Theme.of(context).copyWith(
               colorScheme: Theme.of(context).colorScheme.copyWith(
-                secondary: widget.arrowColor,
-                onSurface: widget.arrowColor,
-              ),
+                    secondary: widget.arrowColor,
+                    onSurface: widget.arrowColor,
+                  ),
               iconTheme: IconThemeData(color: widget.arrowColor),
             ),
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _isOpen = true;
-                  _focusNode.requestFocus();
-                });
-              },
-              child: Focus(
-                onFocusChange: (hasFocus) {
+            child: DropdownMenu<String>(
+              controller: widget.dropDownController,
+              width: effectiveWidth,
+              initialSelection: widget.dropDownController.text.isNotEmpty ? 
+                  widget.dropDownController.text : null,
+              focusNode: _focusNode,
+              onSelected: (String? value) {
+                if (value != null) {
                   setState(() {
-                    _isFocused = hasFocus;
-                    if (!hasFocus) {
-                      _isOpen = false;
+                    widget.dropDownController.text = value;
+                    _showTextField = value == "Other";
+                    
+                    // If not "Other", clear the other text controller
+                    if (value != "Other") {
+                      _otherTextController.clear();
                     }
                   });
-                },
-                child: DropdownMenu<String>(
-                  controller: widget.dropDownController,
-                  width: widget.dropdownWidth,
-                  initialSelection: null,
-                  hintText: null, // Removed default hint
-                  focusNode: _focusNode,
-                  onSelected: (String? value) {
-                    if (value != null) {
-                      setState(() {
-                        dropdownValue = value;
-                        Future.delayed(Duration(milliseconds: 100), () {
-                          setState(() {
-                            _isOpen = false;
-                          });
-                        });
-                      });
-                    }
-                  },
-                  dropdownMenuEntries:
-                      widget.list
-                          .map<DropdownMenuEntry<String>>(
-                            (String value) => DropdownMenuEntry<String>(
-                              value: value,
-                              label: value,
-                            ),
-                          )
-                          .toList(),
-                  textStyle: GoogleFonts.varelaRound(
-                    color: widget.textColor,
-                    fontSize: widget.fontSize,
-                  ),
-                  menuStyle: MenuStyle(
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                }
+              },
+              dropdownMenuEntries: widget.list
+                  .map<DropdownMenuEntry<String>>(
+                    (String value) => DropdownMenuEntry<String>(
+                      value: value,
+                      label: value,
+                      style: ButtonStyle(
+                        textStyle: MaterialStatePropertyAll(
+                          GoogleFonts.varelaRound(
+                            fontSize: widget.fontSize,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    hintStyle: GoogleFonts.varelaRound(
-                      color: widget.textColor,
-                      fontSize: widget.fontSize,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color:
-                            (_isFocused || _isOpen)
-                                ? widget.focusedBorderColor
-                                : unfocusedColor,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color:
-                            (_isFocused || _isOpen)
-                                ? widget.focusedBorderColor
-                                : unfocusedColor,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: widget.focusedBorderColor,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    suffixIconColor: WidgetStateColor.resolveWith(
-                      (states) => widget.arrowColor,
-                    ),
-                    prefixIconColor: WidgetStateColor.resolveWith(
-                      (states) => widget.arrowColor,
-                    ),
-                    iconColor: WidgetStateColor.resolveWith(
-                      (states) => widget.arrowColor,
-                    ),
-                  ),
-                  label: Text(
-                    widget.dropDownController.text.isNotEmpty
-                        ? widget.dropDownController.text
-                        : widget.hintText,
-                    style: GoogleFonts.varelaRound(
-                      color: widget.textColor,
-                      fontSize: widget.fontSize,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.visible, 
+                  )
+                  .toList(),
+              textStyle: widget.textStyle ?? GoogleFonts.varelaRound(
+                color: widget.textColor,
+                fontSize: widget.fontSize,
+              ),
+              menuStyle: MenuStyle(
+                shape: MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
+              label: Text(
+                widget.hintText,
+                style: GoogleFonts.varelaRound(
+                  color: widget.textColor,
+                  fontSize: widget.fontSize,
+                ),
+              ),
+              inputDecorationTheme: InputDecorationTheme(
+                floatingLabelStyle: GoogleFonts.varelaRound(
+                  color: widget.focusedBorderColor,
+                  fontSize: widget.fontSize,
+                ),
+                hintStyle: GoogleFonts.varelaRound(
+                  color: widget.textColor,
+                  fontSize: widget.fontSize,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: _isFocused ? widget.focusedBorderColor : widget.borderColor,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: _isFocused ? widget.focusedBorderColor : widget.borderColor,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.focusedBorderColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                suffixIconColor: MaterialStateColor.resolveWith(
+                  (states) => widget.arrowColor,
+                ),
+                prefixIconColor: MaterialStateColor.resolveWith(
+                  (states) => widget.arrowColor,
+                ),
+                iconColor: MaterialStateColor.resolveWith(
+                  (states) => widget.arrowColor,
+                ),
+              ),
             ),
-          );
-        },
-      ),
+          ),
+        ),
+        if (_showTextField)
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            width: effectiveWidth,
+            child: TextField(
+              controller: _otherTextController,
+              style: GoogleFonts.varelaRound(
+                color: widget.textColor,
+                fontSize: widget.fontSize,
+              ),
+              decoration: InputDecoration(
+                hintText: "Please specify",
+                hintStyle: GoogleFonts.varelaRound(
+                  color: widget.textColor.withOpacity(0.7),
+                  fontSize: widget.fontSize,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: widget.borderColor),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: widget.borderColor),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.focusedBorderColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onChanged: (value) {
+              },
+            ),
+          ),
+      ],
     );
   }
 }
