@@ -3,6 +3,7 @@ import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/common/custom_textfield.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _DemographicState extends State<Demographic> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop:  false,
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -67,9 +68,29 @@ class _DemographicState extends State<Demographic> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        CustomTextField(controller: _name, hint: "Name"),
+                        CustomTextField(
+                          controller: _name,
+                          hint: "Name",
+                          cursor: AppColors.orange,
+                          textcolor: AppColors.orange,
+                          prefixIcon: Icons.abc,
+                          prefixIconColor: AppColors.orange,
+                          focused: AppColors.orange,
+                          hinttextcolor: AppColors.lightorange,
+                          keyboardType: TextInputType.name,
+                        ),
                         const SizedBox(height: 50),
-                        CustomTextField(controller: _email, hint: "Email"),
+                        CustomTextField(
+                          controller: _email,
+                          keyboardType: TextInputType.name,
+                          textcolor: AppColors.orange,
+                          hint: "Email",
+                          prefixIconColor: AppColors.orange,
+                          hinttextcolor: AppColors.lightorange,
+                          cursor: AppColors.orange,
+                          prefixIcon: Icons.email,
+                          focused: AppColors.orange,
+                        ),
                         const SizedBox(height: 50),
                         CustomDropDown(
                           list: [

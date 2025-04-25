@@ -1,3 +1,4 @@
+import 'package:Formify/core/common/custom_textfield.dart';
 import 'package:Formify/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:Formify/features/sheet_pages/Demographic_Information/sheets/googlesheet.dart'
@@ -46,6 +47,8 @@ class _SplashState extends State<Splash> {
     await miscellaneous.SheetsFlutter.init();
   }
 
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _otp = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +74,30 @@ class _SplashState extends State<Splash> {
               ),
               child: Image.asset("assets/slogo.png"),
             ),
-            SizedBox(height: 350),
+            CustomTextField(
+              controller: _email,
+              hint: "Enter the email",
+              keyboardType: TextInputType.name,
+              prefixIconColor: AppColors.white,
+              cursor: AppColors.white,
+              prefixIcon: Icons.email,
+              focused: AppColors.white,
+              textcolor: AppColors.white,
+              hinttextcolor: AppColors.white,
+            ),
+            CustomTextField(
+              controller: _otp,
+              hint: "Enter your otp",
+              keyboardType: TextInputType.number,
+              isObscure: true,
+              prefixIconColor: AppColors.white,
+              cursor: AppColors.white,
+              prefixIcon: Icons.numbers,
+              focused: AppColors.orange,
+              textcolor: AppColors.white,
+              hinttextcolor: AppColors.white,
+            ),
+            SizedBox(height: 50),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/demographic');

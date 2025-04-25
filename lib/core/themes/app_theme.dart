@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static _borderTheme([Color borderColor = Colors.grey, double width = 1]) =>
-      OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: BorderSide(color: borderColor, width: width),
-      );
   static final ThemeData lightTheme = ThemeData.light(
     useMaterial3: true,
   ).copyWith(
@@ -23,17 +18,6 @@ class AppTheme {
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),
-    ),
-
-    inputDecorationTheme: InputDecorationTheme(
-      //_____________________________________TEXT_FIELD
-      suffixIconColor: AppColors.orange,
-      prefixIconColor: AppColors.orange,
-      errorBorder: _borderTheme(AppColors.red, 2),
-      focusedBorder: _borderTheme(AppColors.orange, 2),
-      enabledBorder: _borderTheme(),
-      disabledBorder: _borderTheme(),
-      border: _borderTheme(),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       //__________________________________BUTTONS
