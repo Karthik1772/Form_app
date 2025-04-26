@@ -38,6 +38,9 @@ dependencies:
   gsheets: ^0.5.0
   lottie: ^3.3.1
   flutter_launcher_icons: ^0.14.3
+  flutter_bloc: ^9.1.0
+  equatable: ^2.0.7
+  mailer: ^6.4.1
 
 dev_dependencies:
   flutter_test:

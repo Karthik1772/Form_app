@@ -8,7 +8,7 @@ import 'package:Formify/features/sheet_pages/Miscellaneous_details/Miscellaneous
 import 'package:Formify/features/sheet_pages/Occupation_details/Occupation.dart';
 import 'package:Formify/features/sheet_pages/transpotation_details/transportation.dart';
 import 'package:Formify/features/sheet_pages/waste_managment/waste.dart';
-import 'package:Formify/features/splash_screen/splash.dart';
+import 'package:Formify/features/splash_screen/pages/splash.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
