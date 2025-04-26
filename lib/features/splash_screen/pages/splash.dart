@@ -1,5 +1,5 @@
 import 'package:Formify/core/common/custom_textfield.dart';
-import 'package:Formify/core/common/custom_buttons.dart'; // Add this import
+import 'package:Formify/core/common/custom_buttons.dart'; 
 import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/splash_screen/bloc/otp_bloc.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +132,6 @@ class _SplashState extends State<Splash> {
                         ),
                       SizedBox(height: 130),
 
-                      // Action buttons using CustomButtons
                       _otpSent
                           ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
