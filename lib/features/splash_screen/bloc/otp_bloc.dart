@@ -1,4 +1,4 @@
-import 'package:Formify/features/splash_screen/models/otp_service.dart';
+import 'package:Formify/core/models/otp_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

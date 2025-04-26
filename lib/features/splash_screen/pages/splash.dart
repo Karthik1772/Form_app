@@ -78,7 +78,7 @@ class _SplashState extends State<Splash> {
           return Scaffold(
             backgroundColor: AppColors.orange,
             body: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
                   child: Column(
