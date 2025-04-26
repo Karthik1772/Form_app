@@ -143,6 +143,9 @@ class _DemographicState extends State<Demographic> {
                     Expanded(
                       child: CustomButtons(
                         text: "Next",
+                        fontsize: 20,
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
                         onpressed: () async {
                           if (_name.text.trim().isEmpty ||
                               _email.text.trim().isEmpty ||

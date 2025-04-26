@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Consumer_Choices/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Consumer_Choices/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _Customer extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop:  false,
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -106,6 +107,9 @@ class _Customer extends State<Customer> {
                   children: [
                     Expanded(
                       child: CustomButtons(
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
+                        fontsize: 20,
                         text: "Next",
                         onpressed: () async {
                           if (_buy.text.trim().isEmpty ||

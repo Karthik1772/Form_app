@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Environmentally_Awareness/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Environmentally_Awareness/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,10 @@ class _Environment extends State<Environment> {
                   children: [
                     Expanded(
                       child: CustomButtons(
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
                         text: "Next",
+                        fontsize: 20,
                         onpressed: () async {
                           if (_garden.text.trim().isEmpty ||
                               _aprogram.text.trim().isEmpty ||

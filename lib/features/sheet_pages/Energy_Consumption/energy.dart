@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Energy_Consumption/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Energy_Consumption/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _Energy extends State<Energy> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop:  false,
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -105,7 +106,10 @@ class _Energy extends State<Energy> {
                   children: [
                     Expanded(
                       child: CustomButtons(
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
                         text: "Next",
+                        fontsize: 20,
                         onpressed: () async {
                           if (_power.text.trim().isEmpty ||
                               _energy.text.trim().isEmpty ||

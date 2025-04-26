@@ -19,11 +19,5 @@ class AppTheme {
         fontWeight: FontWeight.w600,
       ),
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      //__________________________________BUTTONS
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.orange),
-      ),
-    ),
   );
 }

@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/transpotation_details/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/transpotation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -98,11 +99,7 @@ class _TransportationState extends State<Transportation> {
                         ),
                         const SizedBox(height: 50),
                         CustomDropDown(
-                          list: [
-                            "Steady and mature",
-                            "Rash",
-                            "No idea",
-                          ],
+                          list: ["Steady and mature", "Rash", "No idea"],
                           dropDownController: _pattern,
                           hintText: "Driving pattern:",
                         ),
@@ -135,6 +132,9 @@ class _TransportationState extends State<Transportation> {
                     Expanded(
                       child: CustomButtons(
                         text: "Next",
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
+                        fontsize: 20,
                         onpressed: () async {
                           if (_primary.text.trim().isEmpty ||
                               _hybrid.text.trim().isEmpty ||

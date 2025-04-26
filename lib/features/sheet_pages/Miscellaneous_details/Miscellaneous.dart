@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Miscellaneous_details/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Miscellaneous_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _Miscellaneous extends State<Miscellaneous> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop:false,
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -81,6 +82,9 @@ class _Miscellaneous extends State<Miscellaneous> {
                     Expanded(
                       child: CustomButtons(
                         text: "Submit",
+                        fontsize: 20,
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
                         onpressed: () async {
                           if (_flight.text.trim().isEmpty ||
                               _carbon.text.trim().isEmpty) {

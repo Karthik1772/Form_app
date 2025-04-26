@@ -2,6 +2,7 @@ import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/googlesheet.dart';
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/sheetscolumn.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _Occupation extends State<Occupation> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop:  false,
+      canPop: false,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -110,6 +111,9 @@ class _Occupation extends State<Occupation> {
                     Expanded(
                       child: CustomButtons(
                         text: "Next",
+                        fontsize: 20,
+                        buttoncolor: AppColors.orange,
+                        textcolor: AppColors.white,
                         onpressed: () async {
                           if (_business.text.trim().isEmpty ||
                               _aprogram.text.trim().isEmpty ||

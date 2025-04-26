@@ -1,16 +1,23 @@
-import 'package:Formify/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButtons extends StatefulWidget {
   final String text;
   final VoidCallback onpressed;
+  final Color buttoncolor;
+  final Color ?loadingcolor;
+  final Color textcolor;
+  final double fontsize;
   final bool isLoading;
   const CustomButtons({
     super.key,
     required this.text,
+    required this.fontsize,
+    required this.buttoncolor,
+    required this.textcolor,
     required this.onpressed,
     this.isLoading = false,
+    this.loadingcolor,
   });
 
   @override
@@ -25,6 +32,7 @@ class _CustomButtons extends State<CustomButtons> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          backgroundColor: widget.buttoncolor,  
           fixedSize: Size(MediaQuery.of(context).size.width, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -34,18 +42,16 @@ class _CustomButtons extends State<CustomButtons> {
         child:
             widget.isLoading
                 ? SizedBox(
-                  // width: 30,
-                  // height: 10,
                   child: CircularProgressIndicator(
-                    // color: AppColors.orange,
+                    color: widget.loadingcolor,  
                     strokeCap: StrokeCap.round,
                   ),
                 )
                 : Text(
                   widget.text,
                   style: GoogleFonts.varelaRound(
-                    color: AppColors.white,
-                    fontSize: 20,
+                    color: widget.textcolor,
+                    fontSize: widget.fontsize,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

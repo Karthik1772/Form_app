@@ -1,4 +1,5 @@
 import 'package:Formify/core/common/custom_textfield.dart';
+import 'package:Formify/core/common/custom_buttons.dart'; // Add this import
 import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/splash_screen/bloc/otp_bloc.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _SplashState extends State<Splash> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _otp = TextEditingController();
   bool _otpSent = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -100,8 +101,7 @@ class _SplashState extends State<Splash> {
                         ),
                         child: Image.asset("assets/slogo.png"),
                       ),
-                      
-                      // Email field
+                      SizedBox(height: 70),
                       CustomTextField(
                         controller: _email,
                         hint: "Enter your email",
@@ -113,7 +113,7 @@ class _SplashState extends State<Splash> {
                         textcolor: AppColors.white,
                         hinttextcolor: AppColors.white,
                       ),
-                      
+
                       // OTP Input field appears after OTP is sent
                       if (_otpSent)
                         CustomTextField(
@@ -127,62 +127,87 @@ class _SplashState extends State<Splash> {
                           focused: AppColors.white,
                           textcolor: AppColors.white,
                           hinttextcolor: AppColors.white,
+                          isotpField: true,
+                          suffixIconColor: AppColors.white,
                         ),
-                      
-                      // Action buttons
-                      _otpSent 
-                        ? Row(
+                      SizedBox(height: 130),
+
+                      // Action buttons using CustomButtons
+                      _otpSent
+                          ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               // Verify OTP button
-                              _buildButton(
-                                context: context,
-                                label: state is OtpLoading ? "Verifying..." : "Verify OTP",
-                                icon: Icons.check_circle_outline,
-                                isLoading: state is OtpLoading,
-                                onTap: () {
-                                  if (state is! OtpLoading) {
-                                    context.read<OtpBloc>().add(
-                                      VerifyOtpRequested(
-                                        email: _email.text.trim(),
-                                        otp: _otp.text.trim(),
-                                      ),
-                                    );
-                                  }
-                                },
+                              Expanded(
+                                child: CustomButtons(
+                                  text:
+                                      state is OtpLoading
+                                          ? "Verifying..."
+                                          : "Verify OTP",
+                                  isLoading: state is OtpLoading,
+                                  buttoncolor: AppColors.white,
+                                  textcolor: AppColors.orange,
+                                  loadingcolor: AppColors.white,
+                                  fontsize: 18,
+                                  onpressed: () {
+                                    if (state is! OtpLoading) {
+                                      context.read<OtpBloc>().add(
+                                        VerifyOtpRequested(
+                                          email: _email.text.trim(),
+                                          otp: _otp.text.trim(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
                               ),
-                              SizedBox(width: 16),
                               // Resend OTP button
-                              _buildButton(
-                                context: context,
-                                label: state is OtpLoading ? "Resending..." : "Resend OTP",
-                                icon: Icons.refresh,
-                                isLoading: state is OtpLoading,
-                                onTap: () {
-                                  if (state is! OtpLoading) {
-                                    context.read<OtpBloc>().add(
-                                      ResendOtpRequested(email: _email.text.trim()),
-                                    );
-                                  }
-                                },
+                              Expanded(
+                                child: CustomButtons(
+                                  text:
+                                      state is OtpLoading
+                                          ? "Resending..."
+                                          : "Resend OTP",
+                                  isLoading: state is OtpLoading,
+                                  buttoncolor: AppColors.white,
+                                  textcolor: AppColors.orange,
+                                  loadingcolor: AppColors.white,
+                                  fontsize: 18,
+                                  onpressed: () {
+                                    if (state is! OtpLoading) {
+                                      context.read<OtpBloc>().add(
+                                        ResendOtpRequested(
+                                          email: _email.text.trim(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           )
-                        : _buildButton(
-                            context: context,
-                            label: state is OtpLoading ? "Sending..." : "Send OTP",
-                            icon: Icons.send,
-                            isLoading: state is OtpLoading,
-                            onTap: () {
-                              if (state is! OtpLoading) {
-                                context.read<OtpBloc>().add(
-                                  SendOtpRequested(email: _email.text.trim()),
-                                );
-                              }
-                            },
-                            width: 175,
+                          : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 60),
+                            child: CustomButtons(
+                              text:
+                                  state is OtpLoading
+                                      ? "Sending..."
+                                      : "Send OTP",
+                              isLoading: state is OtpLoading,
+                              buttoncolor: AppColors.white,
+                              textcolor: AppColors.orange,
+                              loadingcolor: AppColors.white,
+                              fontsize: 20,
+                              onpressed: () {
+                                if (state is! OtpLoading) {
+                                  context.read<OtpBloc>().add(
+                                    SendOtpRequested(email: _email.text.trim()),
+                                  );
+                                }
+                              },
+                            ),
                           ),
-                      
+
                       SizedBox(height: 40),
                     ],
                   ),
@@ -191,56 +216,6 @@ class _SplashState extends State<Splash> {
             ),
           );
         },
-      ),
-    );
-  }
-  
-  Widget _buildButton({
-    required BuildContext context,
-    required String label,
-    required IconData icon,
-    required VoidCallback onTap,
-    required bool isLoading,
-    double width = 140,
-  }) {
-    return GestureDetector(
-      onTap: isLoading ? null : onTap,
-      child: Container(
-        height: 45,
-        width: width,
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.white),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (isLoading)
-              SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(
-                  color: AppColors.white,
-                  strokeWidth: 2,
-                ),
-              )
-            else
-              Text(
-                label,
-                style: GoogleFonts.workSans(
-                  color: AppColors.white,
-                  fontSize: 16,
-                ),
-              ),
-            SizedBox(width: 8),
-            if (!isLoading)
-              Icon(
-                icon,
-                size: 20,
-                color: AppColors.white,
-              ),
-          ],
-        ),
       ),
     );
   }
