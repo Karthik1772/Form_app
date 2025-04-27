@@ -72,132 +72,137 @@ class _Food extends State<Food> {
               children: [
                 const SizedBox(height: 20),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomDropDown(
-                          list: [
-                            "High meat",
-                            "Medium meat",
-                            "Low meat",
-                            "Vegetarian",
-                            "Vegan",
-                            "Pescetarian",
-                            "Other",
-                          ],
-                          dropDownController: _diet,
-                          hintText: "	Type of diet consumed:",
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _beef,
-                          hintText:
-                              "how much beef you consume per week (in kgs):",
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _pork,
-                          hintText:
-                              'how much pork you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _mutton,
-                          hintText:
-                              'how much mutton you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _milk,
-                          hintText:
-                              'how much milk you consume per week (in litres):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _potato,
-                          hintText:
-                              'how much potato you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _vegetables,
-                          hintText:
-                              'how much vegetables you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _rice,
-                          hintText:
-                              'how much rice you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _wheat,
-                          hintText:
-                              'how much other wheat/flour you consume per week (in kgs):',
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: [
-                            "More than 0.5",
-                            "0.25 - 0.5",
-                            "Up To 0.25",
-                            "Never",
-                          ],
-                          dropDownController: _nuts,
-                          hintText:
-                              'how much nuts you consume per week (in kgs):',
-                        ),
-                      ],
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    thickness: 5,
+                    radius: Radius.circular(10),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CustomDropDown(
+                            list: [
+                              "High meat",
+                              "Medium meat",
+                              "Low meat",
+                              "Vegetarian",
+                              "Vegan",
+                              "Pescetarian",
+                              "Other",
+                            ],
+                            dropDownController: _diet,
+                            hintText: "	Type of diet consumed:",
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _beef,
+                            hintText:
+                                "how much beef you consume per week (in kgs):",
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _pork,
+                            hintText:
+                                'how much pork you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _mutton,
+                            hintText:
+                                'how much mutton you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _milk,
+                            hintText:
+                                'how much milk you consume per week (in litres):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _potato,
+                            hintText:
+                                'how much potato you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _vegetables,
+                            hintText:
+                                'how much vegetables you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _rice,
+                            hintText:
+                                'how much rice you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _wheat,
+                            hintText:
+                                'how much other wheat/flour you consume per week (in kgs):',
+                          ),
+                          const SizedBox(height: 50),
+                          CustomDropDown(
+                            list: [
+                              "More than 0.5",
+                              "0.25 - 0.5",
+                              "Up To 0.25",
+                              "Never",
+                            ],
+                            dropDownController: _nuts,
+                            hintText:
+                                'how much nuts you consume per week (in kgs):',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

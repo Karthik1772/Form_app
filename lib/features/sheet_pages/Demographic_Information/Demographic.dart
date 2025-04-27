@@ -29,13 +29,19 @@ class _DemographicState extends State<Demographic> {
   @override
   void initState() {
     super.initState();
+    _loadSavedData();
+  }
+
+  Future<void> _loadSavedData() async {
     final data = FormDataService.instance.getData();
-    _name.text = data[SheetsColumn.name] ?? '';
-    _email.text = data[SheetsColumn.email] ?? '';
-    _age.text = data[SheetsColumn.age] ?? '';
-    _gender.text = data[SheetsColumn.gender] ?? '';
-    _location.text = data[SheetsColumn.location] ?? '';
-    _occupation.text = data[SheetsColumn.occupation] ?? '';
+    setState(() {
+      _name.text = data[SheetsColumn.name] ?? '';
+      _email.text = data[SheetsColumn.email] ?? '';
+      _age.text = data[SheetsColumn.age] ?? '';
+      _gender.text = data[SheetsColumn.gender] ?? '';
+      _location.text = data[SheetsColumn.location] ?? '';
+      _occupation.text = data[SheetsColumn.occupation] ?? '';
+    });
   }
 
   @override
@@ -82,6 +88,7 @@ class _DemographicState extends State<Demographic> {
                         const SizedBox(height: 50),
                         CustomTextField(
                           controller: _email,
+                          isEnabled: false,
                           keyboardType: TextInputType.name,
                           textcolor: AppColors.orange,
                           hint: "Email",

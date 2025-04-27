@@ -14,6 +14,7 @@ class CustomTextField extends StatefulWidget {
   final Color? suffixIconColor;
   final TextInputType keyboardType;
   final Color cursor;
+  final bool ?isEnabled;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -23,10 +24,11 @@ class CustomTextField extends StatefulWidget {
     required this.focused,
     required this.hinttextcolor,
     required this.cursor,
+    required this.prefixIcon,
     this.prefixIconColor,
+    this.isEnabled = true,
     this.suffixIconColor,
     this.isObscure = false,
-    required this.prefixIcon,
     this.isotpField = false,
   });
 
@@ -58,6 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       margin: EdgeInsets.only(left: 20, right: 20),
       width: MediaQuery.of(context).size.width,
       child: TextField(
+        enabled: widget.isEnabled,
         keyboardType: widget.keyboardType,
         controller: widget.controller,
         cursorColor: widget.cursor,
