@@ -36,6 +36,7 @@ class _Waste extends State<Waste> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Waste Management",

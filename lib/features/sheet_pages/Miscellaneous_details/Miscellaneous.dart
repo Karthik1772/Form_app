@@ -36,6 +36,7 @@ class _Miscellaneous extends State<Miscellaneous> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Miscellaneous details",

@@ -42,6 +42,7 @@ class _Occupation extends State<Occupation> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Occupation Details",

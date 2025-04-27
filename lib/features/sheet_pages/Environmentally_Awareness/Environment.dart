@@ -38,6 +38,7 @@ class _Environment extends State<Environment> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Environmental Awareness",

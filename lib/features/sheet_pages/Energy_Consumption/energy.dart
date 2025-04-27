@@ -38,6 +38,7 @@ class _Energy extends State<Energy> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Energy Consumption",

@@ -44,6 +44,7 @@ class _TransportationState extends State<Transportation> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Transportation Details",

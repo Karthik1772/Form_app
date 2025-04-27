@@ -37,6 +37,7 @@ class _Customer extends State<Customer> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Consumer Details",

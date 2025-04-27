@@ -67,7 +67,7 @@ class _SplashState extends State<Splash> {
               text: state.message,
               background: AppColors.white,
               textcolor: AppColors.orange,
-              position: 50,
+              position: -20,
             );
             setState(() {
               _otpSent = true;
@@ -78,7 +78,7 @@ class _SplashState extends State<Splash> {
               text: state.error,
               background: AppColors.white,
               textcolor: AppColors.orange,
-              position: 50,
+              position: -20,
             );
           } else if (state is OtpVerifySuccess) {
             Navigator.pushNamed(context, '/demographic');
@@ -88,7 +88,7 @@ class _SplashState extends State<Splash> {
               text: state.error,
               background: AppColors.white,
               textcolor: AppColors.orange,
-              position: 50,
+              position: -20,
             );
           }
         },

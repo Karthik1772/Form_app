@@ -52,6 +52,7 @@ class _Food extends State<Food> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
               "Food Consumption",
