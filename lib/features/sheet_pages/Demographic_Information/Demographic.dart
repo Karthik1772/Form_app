@@ -153,9 +153,12 @@ class _DemographicState extends State<Demographic> {
                               _gender.text.trim().isEmpty ||
                               _location.text.trim().isEmpty ||
                               _occupation.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }
@@ -165,9 +168,13 @@ class _DemographicState extends State<Demographic> {
                                 _email.text.trim(),
                               );
                           if (existing) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Details already submitted from this email.",
+                            CustomSnackbar.show(
+                              context: context,
+                              text:
+                                  "Details already submitted from this email!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

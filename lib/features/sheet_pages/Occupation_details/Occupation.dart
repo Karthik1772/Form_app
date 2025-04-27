@@ -120,9 +120,12 @@ class _Occupation extends State<Occupation> {
                               _seminar.text.trim().isEmpty ||
                               _distance.text.trim().isEmpty ||
                               _earn.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

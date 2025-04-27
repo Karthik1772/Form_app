@@ -88,9 +88,12 @@ class _Miscellaneous extends State<Miscellaneous> {
                         onpressed: () async {
                           if (_flight.text.trim().isEmpty ||
                               _carbon.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

@@ -115,9 +115,12 @@ class _Customer extends State<Customer> {
                           if (_buy.text.trim().isEmpty ||
                               _reduce.text.trim().isEmpty ||
                               _carbon.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

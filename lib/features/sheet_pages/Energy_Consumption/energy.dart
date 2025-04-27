@@ -114,9 +114,12 @@ class _Energy extends State<Energy> {
                           if (_power.text.trim().isEmpty ||
                               _energy.text.trim().isEmpty ||
                               _month.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

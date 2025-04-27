@@ -142,9 +142,12 @@ class _TransportationState extends State<Transportation> {
                               _pattern.text.trim().isEmpty ||
                               _distance.text.trim().isEmpty ||
                               _pool.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

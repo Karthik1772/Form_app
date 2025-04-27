@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:Formify/core/common/custom_snackbar.dart';
+import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/sheet_pages/Occupation_details/sheets/sheetscolumn.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:flutter/material.dart';
@@ -59,17 +60,32 @@ class SheetsFlutter {
           rowList.any(
             (row) => row.values.contains(null) || row.values.contains(""),
           )) {
-        CustomSnackbar.snackbarShow(
-          context,
-          "Please fill all required fields!",
+        CustomSnackbar.show(
+          context: context,
+          text: "Please fill all required fields!",
+          background: AppColors.orange,
+          textcolor: AppColors.white,
+          position: 50,
         );
         return;
       }
 
       await _userSheet!.values.map.appendRows(rowList);
-      CustomSnackbar.snackbarShow(context, "Details saved successfully!");
+      CustomSnackbar.show(
+        context: context,
+        text: "Details saved successfully!",
+        background: AppColors.orange,
+        textcolor: AppColors.white,
+        position: 50,
+      );
     } catch (e) {
-      CustomSnackbar.snackbarShow(context, "Server error. Try again!");
+      CustomSnackbar.show(
+        context: context,
+        text: "Server error. Try again!",
+        background: AppColors.orange,
+        textcolor: AppColors.white,
+        position: 50,
+      );
       print("Error inserting data: $e");
     }
   }

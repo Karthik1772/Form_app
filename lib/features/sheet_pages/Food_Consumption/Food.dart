@@ -221,9 +221,12 @@ class _Food extends State<Food> {
                               _rice.text.trim().isEmpty ||
                               _wheat.text.trim().isEmpty ||
                               _nuts.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

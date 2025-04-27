@@ -97,9 +97,12 @@ class _Environment extends State<Environment> {
                           if (_garden.text.trim().isEmpty ||
                               _aprogram.text.trim().isEmpty ||
                               _trend.text.trim().isEmpty) {
-                            CustomSnackbar.snackbarShow(
-                              context,
-                              "Please fill all required fields!",
+                            CustomSnackbar.show(
+                              context: context,
+                              text: "Please fill all required fields!",
+                              background: AppColors.orange,
+                              textcolor: AppColors.white,
+                              position: 50,
                             );
                             return;
                           }

@@ -1,5 +1,5 @@
 import 'package:Formify/core/common/custom_textfield.dart';
-import 'package:Formify/core/common/custom_buttons.dart'; 
+import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/themes/app_colors.dart';
 import 'package:Formify/features/splash_screen/bloc/otp_bloc.dart';
 import 'package:flutter/material.dart';
@@ -62,16 +62,34 @@ class _SplashState extends State<Splash> {
       child: BlocConsumer<OtpBloc, OtpState>(
         listener: (context, state) {
           if (state is OtpSendSuccess) {
-            CustomSnackbar.snackbarShow(context, state.message);
+            CustomSnackbar.show(
+              context: context,
+              text: state.message,
+              background: AppColors.white,
+              textcolor: AppColors.orange,
+              position: 50,
+            );
             setState(() {
               _otpSent = true;
             });
           } else if (state is OtpSendFailure) {
-            CustomSnackbar.snackbarShow(context, state.error);
+            CustomSnackbar.show(
+              context: context,
+              text: state.error,
+              background: AppColors.white,
+              textcolor: AppColors.orange,
+              position: 50,
+            );
           } else if (state is OtpVerifySuccess) {
             Navigator.pushNamed(context, '/demographic');
           } else if (state is OtpVerifyFailure) {
-            CustomSnackbar.snackbarShow(context, state.error);
+            CustomSnackbar.show(
+              context: context,
+              text: state.error,
+              background: AppColors.white,
+              textcolor: AppColors.orange,
+              position: 50,
+            );
           }
         },
         builder: (context, state) {
