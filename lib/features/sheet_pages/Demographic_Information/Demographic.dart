@@ -170,22 +170,6 @@ class _DemographicState extends State<Demographic> {
                             return;
                           }
 
-                          final existing =
-                              await SheetsFlutter.checkIfEmailExists(
-                                _email.text.trim(),
-                              );
-                          if (existing) {
-                            CustomSnackbar.show(
-                              context: context,
-                              text:
-                                  "Details already submitted from this email!",
-                              background: AppColors.orange,
-                              textcolor: AppColors.white,
-                              position: 50,
-                            );
-                            return;
-                          }
-
                           FormDataService.instance.saveData({
                             SheetsColumn.name: _name.text.trim(),
                             SheetsColumn.email: _email.text.trim(),
