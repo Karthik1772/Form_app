@@ -5,7 +5,7 @@ class CustomButtons extends StatefulWidget {
   final String text;
   final VoidCallback onpressed;
   final Color buttoncolor;
-  final Color ?loadingcolor;
+  final Color? loadingcolor;
   final Color textcolor;
   final double fontsize;
   final bool isLoading;
@@ -32,7 +32,7 @@ class _CustomButtons extends State<CustomButtons> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.buttoncolor,  
+          backgroundColor: widget.buttoncolor,
           fixedSize: Size(MediaQuery.of(context).size.width, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -43,7 +43,7 @@ class _CustomButtons extends State<CustomButtons> {
             widget.isLoading
                 ? SizedBox(
                   child: CircularProgressIndicator(
-                    color: widget.loadingcolor,  
+                    color: widget.loadingcolor,
                     strokeCap: StrokeCap.round,
                   ),
                 )

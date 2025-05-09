@@ -14,7 +14,7 @@ class CustomTextField extends StatefulWidget {
   final Color? suffixIconColor;
   final TextInputType keyboardType;
   final Color cursor;
-  final bool ?isEnabled;
+  final bool? isEnabled;
   const CustomTextField({
     super.key,
     required this.controller,

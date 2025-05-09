@@ -1,5 +1,6 @@
 import 'package:Formify/core/common/custom_buttons.dart';
 import 'package:Formify/core/common/custom_drop.dart';
+import 'package:Formify/core/common/custom_loading.dart';
 import 'package:Formify/core/common/custom_snackbar.dart';
 import 'package:Formify/core/models/form_data_service.dart';
 import 'package:Formify/core/themes/app_colors.dart';
@@ -21,6 +22,7 @@ class _Environment extends State<Environment> {
   final TextEditingController _trend = TextEditingController();
 
   bool _next = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -51,88 +53,116 @@ class _Environment extends State<Environment> {
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const SizedBox(height: 20),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
+          body: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const SizedBox(height: 20),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CustomDropDown(
+                              list: ["Yes", "No"],
+                              dropDownController: _garden,
+                              hintText: "Do you do gardening",
+                            ),
+                            const SizedBox(height: 50),
+                            CustomDropDown(
+                              list: ["Yes", "No"],
+                              dropDownController: _aprogram,
+                              hintText: "Do you attends awareness programs",
+                            ),
+                            const SizedBox(height: 50),
+                            CustomDropDown(
+                              list: ["Yes", "No"],
+                              dropDownController: _trend,
+                              hintText:
+                                  'Are you aware of trending sustainable features',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CustomDropDown(
-                          list: ["Yes", "No"],
-                          dropDownController: _garden,
-                          hintText: "Do you do gardening",
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: ["Yes", "No"],
-                          dropDownController: _aprogram,
-                          hintText: "Do you attends awareness programs",
-                        ),
-                        const SizedBox(height: 50),
-                        CustomDropDown(
-                          list: ["Yes", "No"],
-                          dropDownController: _trend,
-                          hintText:
-                              'Are you aware of trending sustainable features',
+                        Expanded(
+                          child: CustomButtons(
+                            buttoncolor: AppColors.orange,
+                            textcolor: AppColors.white,
+                            text: "Next",
+                            fontsize: 20,
+                            onpressed: () async {
+                              if (_garden.text.trim().isEmpty ||
+                                  _aprogram.text.trim().isEmpty ||
+                                  _trend.text.trim().isEmpty) {
+                                CustomSnackbar.show(
+                                  context: context,
+                                  text: "Please fill all required fields!",
+                                  background: AppColors.orange,
+                                  textcolor: AppColors.white,
+                                  position: 50,
+                                );
+                                return;
+                              }
+                              setState(() {
+                                _isLoading = true;
+                              });
+                              try {
+                                FormDataService.instance.saveData({
+                                  SheetsColumn.garden: _garden.text.trim(),
+                                  SheetsColumn.aprogram: _aprogram.text.trim(),
+                                  SheetsColumn.trend: _trend.text.trim(),
+                                });
+                                final feedback = {
+                                  SheetsColumn.garden: _garden.text.trim(),
+                                  SheetsColumn.aprogram: _aprogram.text.trim(),
+                                  SheetsColumn.trend: _trend.text.trim(),
+                                };
+
+                                await SheetsFlutter.insert(context, [feedback]);
+                                setState(() {
+                                  _next = true;
+                                });
+                                if (_next) {
+                                  Navigator.pushNamed(context, '/occupation');
+                                }
+                              } catch (e) {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                CustomSnackbar.show(
+                                  context: context,
+                                  text:
+                                      "Error submitting data: ${e.toString()}",
+                                  background: Colors.red,
+                                  textcolor: AppColors.white,
+                                  position: 50,
+                                );
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: CustomButtons(
-                        buttoncolor: AppColors.orange,
-                        textcolor: AppColors.white,
-                        text: "Next",
-                        fontsize: 20,
-                        onpressed: () async {
-                          if (_garden.text.trim().isEmpty ||
-                              _aprogram.text.trim().isEmpty ||
-                              _trend.text.trim().isEmpty) {
-                            CustomSnackbar.show(
-                              context: context,
-                              text: "Please fill all required fields!",
-                              background: AppColors.orange,
-                              textcolor: AppColors.white,
-                              position: 50,
-                            );
-                            return;
-                          }
-                          FormDataService.instance.saveData({
-                            SheetsColumn.garden: _garden.text.trim(),
-                            SheetsColumn.aprogram: _aprogram.text.trim(),
-                            SheetsColumn.trend: _trend.text.trim(),
-                          });
-                          final feedback = {
-                            SheetsColumn.garden: _garden.text.trim(),
-                            SheetsColumn.aprogram: _aprogram.text.trim(),
-                            SheetsColumn.trend: _trend.text.trim(),
-                          };
-
-                          await SheetsFlutter.insert(context, [feedback]);
-                          setState(() {
-                            _next = true;
-                          });
-                          if (_next) {
-                            Navigator.pushNamed(context, '/occupation');
-                          }
-                        },
-                      ),
-                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
-                SizedBox(height: 20),
-              ],
-            ),
+              ),
+              if (_isLoading)
+                CustomLoading(
+                  message: "Submitting data...",
+                  backgroundColor: AppColors.orange,
+                  textColor: AppColors.white,
+                  indicatorColor: AppColors.white,
+                ),
+            ],
           ),
         ),
       ),

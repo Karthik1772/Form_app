@@ -7,7 +7,7 @@ class CustomSnackbar {
     required String text,
     required Color background,
     required Color textcolor,
-    required double position
+    required double position,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -21,10 +21,7 @@ class CustomSnackbar {
           right: 10,
           left: 10,
         ),
-        content: Text(
-          text,
-          style: GoogleFonts.poppins(color: textcolor),
-        ),
+        content: Text(text, style: GoogleFonts.poppins(color: textcolor)),
       ),
     );
   }
