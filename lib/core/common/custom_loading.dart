@@ -34,6 +34,7 @@ class _CustomLoadingState extends State<CustomLoading> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            SizedBox(height: 20,),
             SizedBox(
               height: 60, 
               width: 60,
