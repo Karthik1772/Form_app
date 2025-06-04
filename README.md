@@ -1,96 +1,104 @@
-# Formify App
+# Formify 📋
 
-## Description
-
-**Formify** is a Flutter-based mobile application built with **Clean Architecture** principles. It provides a structured and scalable foundation for building forms and handling user input efficiently. The app includes custom UI components such as buttons, snackbars, dropdowns, and text fields. Additionally, it features generated routes and a custom app theme for a consistent user experience.
-
-Formify is designed to help developers implement form-based applications efficiently while maintaining clean and maintainable code.
-
-## Features
-
-- **Clean Architecture**: Organized code structure with separation of concerns.
-- **Custom Widgets**: Reusable UI components for consistency.
-  - `CustomButton`
-  - `CustomSnackbar`
-  - `CustomDropdown`
-  - `CustomTextField`
-- **Generated Routes**: Simplified navigation management.
-- **Custom App Themes**: Ensures a consistent look and feel.
-- **Scalability**: Built to support future enhancements and additional features.
-
-## Installation
-
-### Prerequisites
-
-Before running the app, ensure you have **Flutter** and **Dart** installed. Follow the official installation guide: [Flutter Installation](https://flutter.dev/docs/get-started/install).
-
-### Steps to Run the App
-
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/your-username/formify.git
-   ```
-
-2. **Navigate to the project directory**:
-   ```sh
-   cd formify
-   ```
-
-3. **Install dependencies**:
-   ```sh
-   flutter pub get
-   ```
-
-4. **Run the app**:
-   ```sh
-   flutter run
-   ```
-
-## Project Structure
-
-The Formify app follows a modular structure to keep the code clean and manageable.
-
-```
-lib/
-│── main.dart          # Entry point of the app
-│
-├── core/
-│   ├── theme/        # Custom themes
-│   ├── widgets/      # Reusable UI components
-|   ├── routes/       # Generated routes
-│
-├── features/
-│   │   ├── final_page/                      # Final page
-│   │   ├── sheet_pages/                     # Form input sections
-│   │   │   ├── Consumer_Choices/
-│   │   │   ├── Demographic_Information/
-│   │   │   ├── Energy_Consumption/
-│   │   │   ├── Environmentally_Awareness/
-│   │   │   ├── Food_Consumption/
-│   │   │   ├── Miscellaneous_details/
-│   │   │   ├── Occupation_details/
-│   │   │   ├── waste_managment/
-│   │   ├── splash_screen/                   # Initial app loading screen
-```
-## Technologies Used
-
-- **Flutter**: Framework for cross-platform mobile development.
-- **Dart**: The programming language used to build the app.
-- **Provider / Riverpod / Bloc (if used)**: State management for handling app logic.
-- **Flutter Widgets**: Custom components for UI consistency.
-
-## License
-
-This project is open-source and licensed under the [MIT License](LICENSE).
-
-## Contributing
-
-We welcome contributions! Feel free to fork the repository, make improvements, and submit a pull request.
-
-## Acknowledgements
-
-- **Flutter**: For providing a robust framework for app development.
-- **Community Contributors**: For continuous improvements and suggestions.
+**Formify** is a customized digital form application built using Flutter and Clean Architecture. It was developed as part of a 12-week internship at **IIIT Dharwad** under the project *"Recommending Sustainable Alternatives for Reducing Carbon Footprints at Individual Levels."* The app promotes **paperless data collection**, offering a modern, eco-friendly alternative to traditional paper-based forms.
 
 ---
 
+## 🌱 Purpose
+
+Formify was designed with the **primary goal of reducing carbon footprint** by minimizing paper usage, particularly in academic and administrative environments.
+
+---
+
+## 🚀 Features
+
+* 📝 Create and manage digital forms
+* 🔒 Secure and offline-friendly storage
+* 📊 Collect, validate, and manage submissions
+* 🧱 Built using **Clean Architecture**
+* ⚙️ Modular, maintainable codebase
+* 🌍 Environmentally conscious design
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework**: [Flutter](https://flutter.dev/)
+* **Architecture**: Clean Architecture
+* **State Management**: (Specify if using Provider, Riverpod, Bloc, etc.)
+* **Storage**: [Shared Preferences](https://pub.dev/packages/shared_preferences) or (specify if different)
+* **IDE**: Android Studio / VS Code
+
+---
+
+## 📁 Project Structure
+
+```
+lib/
+├── core/           # Entities, models, constants
+├── features/       # Screens, widgets, and logic
+└── main.dart       # Entry point
+```
+
+---
+
+## 🚧 Getting Started
+
+### Prerequisites
+
+* [Flutter SDK](https://flutter.dev/docs/get-started/install)
+* IDE like Android Studio or VS Code
+
+### Installation
+
+```bash
+git clone https://github.com/Karthik1772/Formify.git
+cd Formify
+flutter pub get
+flutter run
+```
+
+---
+
+## 📦 Download APK
+
+You can download the release version of Formify below:
+
+👉 [Download Formify v1.0.0 APK](https://github.com/Karthik1772/Formify/releases/download/v1.0.0/app-release.apk)
+
+> ⚠️ On Android, you may need to allow installation from unknown sources.
+
+---
+
+## 🏅 Internship Details
+
+> This project was developed during a 12-week internship at
+> **Indian Institute of Information Technology Dharwad** (IIIT Dharwad)
+> under the guidance of **Dr. Krishnendu Ghosh**.
+>
+> *Title*: Recommending Sustainable Alternatives for Reducing Carbon Footprints
+> *Mode*: Online
+> *Duration*: 17th Feb 2025 – May 2025
+
+---
+
+## 🤝 Contributing
+
+Open to collaborations and contributions! Fork this repo and raise a pull request to get started.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+## 🙋‍♂️ Author
+
+* **Karthik S Kashyap**
+  [GitHub](https://github.com/Karthik1772)
+
+---
+
+Let me know if you want this exported as a `.md` file or want to include screenshots and badges as well!
