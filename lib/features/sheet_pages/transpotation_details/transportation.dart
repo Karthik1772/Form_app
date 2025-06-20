@@ -79,7 +79,7 @@ class _TransportationState extends State<Transportation> {
                                 "Bicycle",
                                 "Walking",
                                 "Motorcycle/scooter",
-                                "Other (please specify)",
+                                "Other",
                               ],
                               dropDownController: _primary,
                               hintText: "Primary mode of transportation",

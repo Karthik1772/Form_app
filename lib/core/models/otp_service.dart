@@ -40,7 +40,7 @@ class OtpService {
         username:
             'formifyacess@gmail.com', // Replace with your actual Gmail address
         password:
-            'lpvnxnhbyteaxvjc', // Replace with your 16-character App Password
+            'isnwjuiroeafaakh', // Replace with your 16-character App Password
         ssl: false,
         allowInsecure: false,
       );
